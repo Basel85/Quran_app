@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:quran_app/bussiness_logic/auth/auth_cubit.dart';
+import 'package:quran_app/bussiness_logic/my_bloc_observer.dart';
 import 'package:quran_app/presentation/cubits/password_visibility/password_visibility_cubit.dart';
 import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/navigator_key.dart';
@@ -10,10 +12,14 @@ import 'package:quran_app/utils/route_generator.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  Bloc.observer = MyBlocObserver();
   runApp(
     MultiBlocProvider(providers: [
       BlocProvider<PasswordVisibilityCubit>(
         create: (context) => PasswordVisibilityCubit(),
+      ),
+      BlocProvider<AuthCubit>(
+        create: (context) => AuthCubit(),
       ),
     ], child: const MyApp())
   );
