@@ -70,4 +70,19 @@ class AppThemes {
     fontSize: 11 * _textRatio,
     fontWeight: FontWeight.w400,
   );
+  static TextStyle color0xFF300759FontSize18FontWeightW700 = TextStyle(
+    color: color0xFF300759,
+    fontSize: 18 * _textRatio,
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle color0xFF9D1DF2FontSize13FontWeightW500 = TextStyle(
+    color: color0xFF9D1DF2,
+    fontSize: 13 * _textRatio,
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle color0xFF300759FontSize13FontWeightW700 = TextStyle(
+    color: color0xFF300759,
+    fontSize: 13 * _textRatio,
+    fontWeight: FontWeight.w700,
+  );
 }

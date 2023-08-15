@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:quran_app/data/data_providers/remote/firebase_helper.dart';
 
 abstract class FirebaseLogin {
   Future<UserCredential> signIn();
@@ -25,7 +26,7 @@ class GoogleLogin extends FirebaseLogin {
     );
 
     // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance
+    return await FirebaseHelper.getInstance()
         .signInWithCredential(googleAuthCredential);
   }
 }

@@ -2,16 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:quran_app/bussiness_logic/auth/auth_cubit.dart';
 import 'package:quran_app/bussiness_logic/auth/auth_states.dart';
 import 'package:quran_app/presentation/cubits/password_visibility/password_visibility_cubit.dart';
 import 'package:quran_app/presentation/cubits/password_visibility/password_visibility_states.dart';
 import 'package:quran_app/presentation/widgets/auth/custom_text_field.dart';
-import 'package:quran_app/presentation/widgets/shared/custom_snack_bar.dart';
 import 'package:quran_app/utils/app_assets.dart';
 import 'package:quran_app/utils/app_themes.dart';
+import 'package:quran_app/utils/navigator_key.dart';
 import 'package:quran_app/utils/size_config.dart';
+import 'package:quran_app/utils/snackbar_viewer.dart';
 
 class AuthComponent extends StatefulWidget {
   final bool isThisLoginScreen;
@@ -21,7 +21,7 @@ class AuthComponent extends StatefulWidget {
   State<AuthComponent> createState() => _AuthComponentState();
 }
 
-class _AuthComponentState extends State<AuthComponent> {
+class _AuthComponentState extends State<AuthComponent> with SnackBarViewer {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   
@@ -44,15 +44,11 @@ class _AuthComponentState extends State<AuthComponent> {
             ),
           );
         }
-        debugPrint("basola");
         if (state is AuthSuccessState) {
-          debugPrint("basola3");
-          ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(message: state.successMessage, backgroundColor: Colors.green) as SnackBar);
-          debugPrint("basola9");
+          showSnackBar(context: NavigatorKey.navigatorKey.currentContext!, backgroundColor: Colors.green, message: state.successMessage);
         }
-        debugPrint("basola8");
         if (state is AuthErrorState) {
-          ScaffoldMessenger.of(context).showSnackBar(CustomSnackBar(message: state.errorMessage, backgroundColor: Colors.green) as SnackBar);
+          showSnackBar(context: NavigatorKey.navigatorKey.currentContext!, backgroundColor: Colors.red, message: state.errorMessage);
         }
       },
       child: Stack(
