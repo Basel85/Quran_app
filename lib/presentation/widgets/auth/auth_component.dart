@@ -9,7 +9,7 @@ import 'package:quran_app/presentation/cubits/password_visibility/password_visib
 import 'package:quran_app/presentation/widgets/auth/custom_text_field.dart';
 import 'package:quran_app/utils/app_assets.dart';
 import 'package:quran_app/utils/app_themes.dart';
-import 'package:quran_app/utils/navigator_key.dart';
+import 'package:quran_app/utils/keys.dart';
 import 'package:quran_app/utils/size_config.dart';
 import 'package:quran_app/utils/snackbar_viewer.dart';
 
@@ -45,10 +45,10 @@ class _AuthComponentState extends State<AuthComponent> with SnackBarViewer {
           );
         }
         if (state is AuthSuccessState) {
-          showSnackBar(context: NavigatorKey.navigatorKey.currentContext!, backgroundColor: Colors.green, message: state.successMessage);
+          showSnackBar(context: Keys.navigatorKey.currentContext!, backgroundColor: Colors.green, message: state.successMessage);
         }
         if (state is AuthErrorState) {
-          showSnackBar(context: NavigatorKey.navigatorKey.currentContext!, backgroundColor: Colors.red, message: state.errorMessage);
+          showSnackBar(context: Keys.navigatorKey.currentContext!, backgroundColor: Colors.red, message: state.errorMessage);
         }
       },
       child: Stack(

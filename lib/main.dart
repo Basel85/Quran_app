@@ -6,7 +6,7 @@ import 'package:quran_app/bussiness_logic/auth/auth_cubit.dart';
 import 'package:quran_app/bussiness_logic/my_bloc_observer.dart';
 import 'package:quran_app/presentation/cubits/password_visibility/password_visibility_cubit.dart';
 import 'package:quran_app/utils/app_themes.dart';
-import 'package:quran_app/utils/navigator_key.dart';
+import 'package:quran_app/utils/keys.dart';
 import 'package:quran_app/utils/route_generator.dart';
 
 void main() async {
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       title: 'Quran App',
       onGenerateRoute: RouteGenerator.generateRoute,
-      navigatorKey: NavigatorKey.navigatorKey,
+      navigatorKey: Keys.navigatorKey,
       theme: ThemeData(
         scaffoldBackgroundColor: AppThemes.color0xFFDAD0E1,
         fontFamily: 'Poppins',
