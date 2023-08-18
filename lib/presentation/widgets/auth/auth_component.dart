@@ -194,8 +194,8 @@ class _AuthComponentState extends State<AuthComponent> with SnackBarViewer {
                         Navigator.pushNamed(
                             context,
                             widget.isThisLoginScreen
-                                ? '/registerscreen'
-                                : '/loginscreen');
+                                ? '/register'
+                                : '/login');
                       },
                   )
                 ]))

@@ -27,7 +27,9 @@ class _InitialScreenState extends State<InitialScreen> {
         stream: AuthCubit.get(context).authStateChanges(),
         builder: (_, snapShot) {
           if (snapShot.hasData) {
-            return const HomeScreen(snapShot.data!.providerData[0]);
+            return HomeScreen(
+              displayName: snapShot.data!.displayName,
+            );
           } else {
             return const OnBoardingScreen();
           }

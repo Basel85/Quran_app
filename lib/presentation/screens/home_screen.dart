@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quran_app/presentation/widgets/home/drawer_non_header_component.dart';
+import 'package:quran_app/presentation/widgets/shared/custom_app_bar.dart';
 import 'package:quran_app/utils/app_assets.dart';
 import 'package:quran_app/utils/app_themes.dart';
-import 'package:quran_app/utils/keys.dart';
 import 'package:quran_app/utils/size_config.dart';
 
 class HomeScreen extends StatelessWidget {
-  final UserInfo userInfo;
-  const HomeScreen({super.key, this.userInfo});
+  final String? displayName;
+  const HomeScreen({super.key, required this.displayName});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: Keys.scaffoldKey,
         drawer: Container(
           width: 205 * SizeConfig.horizontalBlock,
           height: double.infinity,
           decoration: ShapeDecoration(
-            color: Colors.white,
+            color: AppThemes.pureWhite,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
             shadows: const [
               BoxShadow(
-                color: Color(0x3F000000),
+                color: AppThemes.color0x3F000000,
                 blurRadius: 10,
                 offset: Offset(4, 4),
                 spreadRadius: 0,
@@ -36,26 +36,53 @@ class HomeScreen extends StatelessWidget {
                 height: 31 * SizeConfig.verticalBlock,
               ),
               Container(
-                margin: EdgeInsets.only(left: 24 * SizeConfig.horizontalBlock),
+                margin: EdgeInsets.only(
+                    left: 24 * SizeConfig.horizontalBlock,
+                    bottom: 39 * SizeConfig.verticalBlock),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       padding: EdgeInsets.only(
                           top: 11 * SizeConfig.verticalBlock,
-                          bottom: 7 * SizeConfig.verticalBlock),
-                      alignment: Alignment.center,
+                          bottom: 7 * SizeConfig.verticalBlock,
+                          right: 9 * SizeConfig.horizontalBlock,
+                          left: 9 * SizeConfig.horizontalBlock),
                       decoration: const ShapeDecoration(
                         color: AppThemes.color0xFF300759,
                         shape: OvalBorder(),
                       ),
-                    )
+                      child: SvgPicture.asset(AppAssets.helalIcon),
+                    ),
+                    SizedBox(
+                      width: 12 * SizeConfig.horizontalBlock,
+                    ),
+                    Expanded(
+                        child: Text(
+                      displayName!,
+                      style: AppThemes.color0xFF300759FontSize13FontWeightW600,
+                    ))
                   ],
                 ),
-              )
+              ),
+              NonHeaderDrawerComponent(
+                  onTap: () => Navigator.pushNamed(context, '/notification'),
+                  nonHeaderDrawerIcon: Icons.notifications,
+                  nonHeaderDrawerText: "Notification"),
+              NonHeaderDrawerComponent(
+                  onTap: () => Navigator.pushNamed(context, '/settings'),
+                  nonHeaderDrawerIcon: Icons.settings,
+                  nonHeaderDrawerText: "Settings"),
+              NonHeaderDrawerComponent(
+                  onTap: () {},
+                  nonHeaderDrawerIcon: Icons.logout,
+                  nonHeaderDrawerText: "Log Out"),
             ],
           ),
+        ),
+        appBar: const CustomAppBar(
+          title: "Quran App",
         ),
         body: SizedBox(
           width: double.infinity,
@@ -63,28 +90,6 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 108 * SizeConfig.verticalBlock,
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 32 * SizeConfig.horizontalBlock),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                        onTap: () =>
-                            Keys.scaffoldKey.currentState!.openDrawer(),
-                        child: SvgPicture.asset(AppAssets.menuIcon)),
-                    SizedBox(
-                      width: 18 * SizeConfig.horizontalBlock,
-                    ),
-                    Text(
-                      "Quran App",
-                      style: AppThemes.color0xFF300759FontSize24FontWeightW700,
-                    )
-                  ],
-                ),
-              ),
               SizedBox(
                 height: 35 * SizeConfig.verticalBlock,
               ),
@@ -110,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                                       textAlign: TextAlign.center,
                                     ),
                                     Text(
-                                      "Mohamed Ali",
+                                      displayName!,
                                       style: AppThemes
                                           .color0xFF300759FontSize18FontWeightW700,
                                       textAlign: TextAlign.center,

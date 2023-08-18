@@ -78,7 +78,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   left: (32 + 56) * SizeConfig.horizontalBlock,
                   right: (32 + 57) * SizeConfig.horizontalBlock,
                   child: GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, '/loginscreen'),
+                    onTap: () => Navigator.pushNamed(context, '/login'),
                     child: Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(
