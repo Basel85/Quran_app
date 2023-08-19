@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:quran_app/bussiness_logic/auth/auth_cubit.dart';
 import 'package:quran_app/presentation/widgets/settings/settings_component.dart';
 import 'package:quran_app/presentation/widgets/shared/custom_app_bar.dart';
 import 'package:quran_app/utils/app_themes.dart';
@@ -25,24 +24,6 @@ class SettingsScreen extends StatelessWidget with SnackBarViewer {
             SizedBox(
               height: 29 * SizeConfig.verticalBlock,
             ),
-            // SettingsComponent(
-            //   settingsComponentName: "Account",
-            //   contents: [
-            //     StreamBuilder(
-            //       builder: (_, snapShot) {
-            //         if (snapShot.connectionState == ConnectionState.waiting) {
-            //           return const Center(
-            //             child: CircularProgressIndicator(),
-            //           );
-            //         } else if (snapShot.hasData) {
-            //           snapShot.data
-            //           return List.generate(length, (index) => null);
-            //         }
-            //       },
-            //       stream: AuthCubit.get(context).authStateChanges(),
-            //     )
-            //   ],
-            // ),
             const SettingsComponent(
               settingsComponentName: "Notification",
               contents: [],
