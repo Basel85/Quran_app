@@ -14,6 +14,8 @@ class AppThemes {
   static const Color color0xFF0E17F6 = Color(0xFF0E17F6);
   static const Color color0x3F000000 = Color(0x3F000000);
   static const Color pureWhite = Colors.white;
+  static const Color color0xFF484848 = Color(0xFF484848);
+  static const Color color0xE00E17F6 = Color(0xE00E17F6);
   static late double _textRatio;
 
   static void init(double textRatio) {
@@ -111,4 +113,16 @@ class AppThemes {
           color: color0xFF300759,
           fontSize: 18 * _textRatio,
           fontWeight: FontWeight.w500);
+  static TextStyle color0xFF484848FontSize11FontWeightW500 =
+      GoogleFonts.poppins(
+    color: color0xFF484848,
+    fontSize: 11 * _textRatio,
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle color0xE00E17F6FontSize11FontWeightW500 =
+      GoogleFonts.poppins(
+    color: color0xE00E17F6,
+    fontSize: 11 * _textRatio,
+    fontWeight: FontWeight.w500,
+  );
 }
