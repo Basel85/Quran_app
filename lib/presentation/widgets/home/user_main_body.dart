@@ -1,90 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:quran_app/presentation/widgets/home/drawer_non_header_component.dart';
-import 'package:quran_app/presentation/widgets/shared/custom_app_bar.dart';
-import 'package:quran_app/utils/app_assets.dart';
 import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/size_config.dart';
 
-class UserMainScreen extends StatelessWidget {
+class UserMainBody extends StatelessWidget {
   final String displayName;
-  const UserMainScreen({super.key, required this.displayName});
+  const UserMainBody({super.key, required this.displayName});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Container(
-        width: 205 * SizeConfig.horizontalBlock,
-        height: double.infinity,
-        decoration: ShapeDecoration(
-          color: AppThemes.pureWhite,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          shadows: const [
-            BoxShadow(
-              color: AppThemes.color0x3F000000,
-              blurRadius: 10,
-              offset: Offset(4, 4),
-              spreadRadius: 0,
-            )
-          ],
-        ),
-        child: ListView(
-          children: [
-            SizedBox(
-              height: 31 * SizeConfig.verticalBlock,
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                  left: 24 * SizeConfig.horizontalBlock,
-                  bottom: 39 * SizeConfig.verticalBlock),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(
-                        top: 11 * SizeConfig.verticalBlock,
-                        bottom: 7 * SizeConfig.verticalBlock,
-                        right: 9 * SizeConfig.horizontalBlock,
-                        left: 9 * SizeConfig.horizontalBlock),
-                    decoration: const ShapeDecoration(
-                      color: AppThemes.color0xFF300759,
-                      shape: OvalBorder(),
-                    ),
-                    child: SvgPicture.asset(AppAssets.helalIcon),
-                  ),
-                  SizedBox(
-                    width: 12 * SizeConfig.horizontalBlock,
-                  ),
-                  Expanded(
-                      child: Text(
-                    displayName,
-                    style: AppThemes.color0xFF300759FontSize13FontWeightW600,
-                  ))
-                ],
-              ),
-            ),
-            NonHeaderDrawerComponent(
-                onTap: () => Navigator.pushNamed(context, '/notification'),
-                nonHeaderDrawerIcon: Icons.notifications,
-                nonHeaderDrawerText: "Notification"),
-            NonHeaderDrawerComponent(
-                onTap: () => Navigator.pushNamed(context, '/settings'),
-                nonHeaderDrawerIcon: Icons.settings,
-                nonHeaderDrawerText: "Settings"),
-            NonHeaderDrawerComponent(
-                onTap: () {},
-                nonHeaderDrawerIcon: Icons.logout,
-                nonHeaderDrawerText: "Log Out"),
-          ],
-        ),
-      ),
-      appBar: const CustomAppBar(
-        title: "Quran App",
-      ),
-      body: SizedBox(
+    return SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -187,7 +111,6 @@ class UserMainScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
     );
   }
 }

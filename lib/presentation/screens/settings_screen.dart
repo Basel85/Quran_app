@@ -14,10 +14,13 @@ class SettingsScreen extends StatelessWidget with SnackBarViewer {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(
-          title: "Settings",
-          actionsIcon: Icons.settings,
-          isHome: false,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(92*SizeConfig.verticalBlock),
+          child: const CustomAppBar(
+            title: "Settings",
+            actionsIcon: Icons.settings,
+            isHome: false,
+          ),
         ),
         body: ListView(
           children: [

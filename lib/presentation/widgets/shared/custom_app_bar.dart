@@ -4,15 +4,17 @@ import 'package:quran_app/utils/app_assets.dart';
 import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/size_config.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget{
   final String title;
   final bool isHome;
+  final bool isNotMainUserScreenAndNonBottomNavigationBarScreens;
   final IconData? actionsIcon;
   const CustomAppBar(
-      {super.key, required this.title, this.actionsIcon, this.isHome = true});
-
-  @override
-  Size get preferredSize => Size.fromHeight(92 * SizeConfig.verticalBlock);
+      {super.key,
+      required this.title,
+      this.actionsIcon,
+      this.isHome = true,
+      this.isNotMainUserScreenAndNonBottomNavigationBarScreens = false});
 
   @override
   Widget build(BuildContext context) {
@@ -30,24 +32,37 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                isHome
-                    ? GestureDetector(
-                        onTap: () => Scaffold.of(context).openDrawer(),
+                if (isHome) ...[
+                  if (!isNotMainUserScreenAndNonBottomNavigationBarScreens) ...[
+                    GestureDetector(
+                        onTap: () {
+                          Scaffold.of(context).openDrawer();
+                        },
                         child: SvgPicture.asset(AppAssets.menuIcon))
-                    : GestureDetector(
-                        onTap: ()=>Navigator.pop(context),
-                        child: SvgPicture.asset(AppAssets.backIcon),
-                      ),
-                SizedBox(
-                  width: 18 * SizeConfig.horizontalBlock,
-                ),
+                  ]
+                ] else ...[
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: SvgPicture.asset(AppAssets.backIcon),
+                  ),
+                ],
+                if (!isNotMainUserScreenAndNonBottomNavigationBarScreens) ...[
+                  SizedBox(
+                    width: 18 * SizeConfig.horizontalBlock,
+                  ),
+                ],
                 Expanded(
                   child: Text(
                     title,
                     style: AppThemes.color0xFF300759FontSize24FontWeightW700,
                   ),
                 ),
-                if (actionsIcon != null) ...[Icon(actionsIcon,size: 16*SizeConfig.horizontalBlock,)]
+                if (actionsIcon != null) ...[
+                  Icon(
+                    actionsIcon,
+                    size: 16 * SizeConfig.horizontalBlock,
+                  )
+                ]
               ]),
         ),
       ),
