@@ -30,6 +30,16 @@ class AppThemes {
       borderRadius: BorderRadius.circular(10),
     ),
   );
+  static Decoration color0xFFE5B6F2BorderRadiusTopLeft20BottomRight20 =
+      const ShapeDecoration(
+    color: AppThemes.color0xFFE5B6F2,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(20),
+        bottomRight: Radius.circular(20),
+      ),
+    ),
+  );
   // TEXT STYLES
   static TextStyle color0xFF300759FontSize24FontWeightW700 =
       GoogleFonts.poppins(
@@ -141,6 +151,23 @@ class AppThemes {
       GoogleFonts.poppins(
     color: color0xFF300759,
     fontSize: 11 * _textRatio,
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle color0xFF300759FontSize12FontWeightW700 =
+      GoogleFonts.poppins(
+    color: color0xFF300759,
+    fontSize: 12 * _textRatio,
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle color0xFF300759FontSize12FontWeightW600 =
+      GoogleFonts.poppins(
+    color: color0xFF300759,
+    fontSize: 12 * _textRatio,
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle color0xFF484848FontSize12FontWeightW500 = GoogleFonts.poppins(
+    color: color0xFF484848,
+    fontSize: 12 * _textRatio,
     fontWeight: FontWeight.w500,
   );
 }

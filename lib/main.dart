@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:quran_app/bussiness_logic/auth/auth_cubit.dart';
 import 'package:quran_app/bussiness_logic/my_bloc_observer.dart';
 import 'package:quran_app/presentation/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
+import 'package:quran_app/presentation/cubits/calendar/calendar_cubit.dart';
 import 'package:quran_app/presentation/cubits/password_visibility/password_visibility_cubit.dart';
 import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/keys.dart';
@@ -22,7 +23,8 @@ void main() async {
       create: (context) => AuthCubit(),
     ),
     BlocProvider<BottomNavigationBarCubit>(
-        create: (context) => BottomNavigationBarCubit())
+        create: (context) => BottomNavigationBarCubit()),
+    BlocProvider<CalendarCubit>(create: (context) => CalendarCubit())
   ], child: const MyApp()));
 }
 

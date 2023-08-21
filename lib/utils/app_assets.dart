@@ -7,4 +7,5 @@ class AppAssets {
   static const String menuIcon = 'assets/icons/menu.svg';
   static const String helalIcon = 'assets/icons/helal.svg';
   static const String backIcon = 'assets/icons/back.svg';
+  static const String directionIcon = 'assets/icons/direction.svg';
 }
