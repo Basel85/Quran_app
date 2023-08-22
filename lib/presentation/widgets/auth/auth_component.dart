@@ -73,14 +73,14 @@ class _AuthComponentState extends State<AuthComponent> with SnackBarViewer {
                 ),
                 Text(
                   "Quran App",
-                  style: AppThemes.color0xFF300759FontSize24FontWeightW700,
+                  style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize24FontWeightW700,
                 ),
                 SizedBox(
                   height: 6 * SizeConfig.verticalBlock,
                 ),
                 Text(
                   "Asalamu Alaikum !!!",
-                  style: AppThemes.color0xFF9D1DF2FontSize13FontWeightW700,
+                  style: AppThemes.fontFamilyPoppinsColor0xFF9D1DF2FontSize13FontWeightW700,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
@@ -92,7 +92,7 @@ class _AuthComponentState extends State<AuthComponent> with SnackBarViewer {
                       EdgeInsets.only(left: 32 * SizeConfig.horizontalBlock),
                   child: Text(
                     widget.isThisLoginScreen ? "Sign In" : "Register",
-                    style: AppThemes.color0xFF9D1DF2FontSize14FontWeightW700,
+                    style: AppThemes.fontFamilyPoppinsColor0xFF9D1DF2FontSize14FontWeightW700,
                   ),
                 ),
                 SizedBox(
@@ -153,7 +153,7 @@ class _AuthComponentState extends State<AuthComponent> with SnackBarViewer {
                   decoration: AppThemes.color0xFFE5B6F2BorderRadius10,
                   child: Text(
                     widget.isThisLoginScreen ? "Sign in" : "Register",
-                    style: AppThemes.color0xFF300759FontSize13FontWeightW600,
+                    style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize13FontWeightW600,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -163,7 +163,7 @@ class _AuthComponentState extends State<AuthComponent> with SnackBarViewer {
                 Text(
                   "Or",
                   textAlign: TextAlign.center,
-                  style: AppThemes.color0xFF300759FontSize13FontWeightW400,
+                  style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize13FontWeightW400,
                 ),
                 SizedBox(
                   height: 25 * SizeConfig.verticalBlock,
@@ -182,13 +182,13 @@ class _AuthComponentState extends State<AuthComponent> with SnackBarViewer {
                     text: widget.isThisLoginScreen
                         ? "Don't have an account ? "
                         : "Already have an account ? ",
-                    style: AppThemes.color0xFF300759FontSize11FontWeightW400,
+                    style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize11FontWeightW400,
                   ),
                   TextSpan(
                     text: widget.isThisLoginScreen
                         ? 'Register here'
                         : 'Sign in here',
-                    style: AppThemes.color0xFF0E17F6FontSize11FontWeightW400,
+                    style: AppThemes.fontFamilyPoppinsColor0xFF0E17F6FontSize11FontWeightW400,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         Navigator.pushNamed(

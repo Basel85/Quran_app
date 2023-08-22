@@ -32,7 +32,7 @@ class NonHeaderDrawerComponent extends StatelessWidget {
             ),
             Text(
               nonHeaderDrawerText,
-              style: AppThemes.color0xFF300759FontSize15FontWeitghtW500,
+              style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize15FontWeitghtW500,
             )
           ],
         ),

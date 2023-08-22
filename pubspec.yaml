@@ -49,6 +49,7 @@ dependencies:
   url_launcher: ^6.1.12
   font_awesome_flutter: ^10.5.0
   table_calendar: ^3.0.9
+  http: ^1.1.0
 
 
 dev_dependencies:

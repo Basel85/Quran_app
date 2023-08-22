@@ -100,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                   Expanded(
                       child: Text(
                     displayName!,
-                    style: AppThemes.color0xFF300759FontSize13FontWeightW600,
+                    style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize13FontWeightW600,
                   ))
                 ],
               ),

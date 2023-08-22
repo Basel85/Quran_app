@@ -41,133 +41,145 @@ class AppThemes {
     ),
   );
   // TEXT STYLES
-  static TextStyle color0xFF300759FontSize24FontWeightW700 =
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize24FontWeightW700 =
       GoogleFonts.poppins(
     color: color0xFF300759,
     fontSize: 24 * _textRatio,
     fontWeight: FontWeight.w700,
   );
-  static TextStyle color0xFF9D1DF2FontSize13FontWeightW700 =
+  static TextStyle fontFamilyPoppinsColor0xFF9D1DF2FontSize13FontWeightW700 =
       GoogleFonts.poppins(
     color: color0xFF9D1DF2,
     fontSize: 13 * _textRatio,
     fontWeight: FontWeight.w700,
   );
-  static TextStyle color0xFFDAD0E1FontSize18FontWeightW600 =
+  static TextStyle fontFamilyPoppinsColor0xFFDAD0E1FontSize18FontWeightW600 =
       GoogleFonts.poppins(
     color: color0xFFDAD0E1,
     fontSize: 18 * _textRatio,
     fontWeight: FontWeight.w600,
   );
-  static TextStyle color0xFF9D1DF2FontSize14FontWeightW700 =
+  static TextStyle fontFamilyPoppinsColor0xFF9D1DF2FontSize14FontWeightW700 =
       GoogleFonts.poppins(
     color: color0xFF9D1DF2,
     fontSize: 14 * _textRatio,
     fontWeight: FontWeight.w700,
   );
-  static TextStyle color0xCC300759FontSize13FontWeightW400 =
+  static TextStyle fontFamilyPoppinsColor0xCC300759FontSize13FontWeightW400 =
       GoogleFonts.poppins(
     color: color0xCC300759,
     fontSize: 13 * _textRatio,
     fontWeight: FontWeight.w400,
   );
-  static TextStyle color0xFF300759FontSize13FontWeightW600 =
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize13FontWeightW600 =
       GoogleFonts.poppins(
     color: color0xFF300759,
     fontSize: 13 * _textRatio,
     fontWeight: FontWeight.w600,
   );
-  static TextStyle color0xFF300759FontSize13FontWeightW400 =
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize13FontWeightW400 =
       GoogleFonts.poppins(
     color: color0xFF300759,
     fontSize: 13 * _textRatio,
     fontWeight: FontWeight.w400,
   );
-  static TextStyle color0xFF300759FontSize11FontWeightW400 =
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize11FontWeightW400 =
       GoogleFonts.poppins(
     color: color0xFF300759,
     fontSize: 11 * _textRatio,
     fontWeight: FontWeight.w400,
   );
-  static TextStyle color0xFF0E17F6FontSize11FontWeightW400 =
+  static TextStyle fontFamilyPoppinsColor0xFF0E17F6FontSize11FontWeightW400 =
       GoogleFonts.poppins(
     color: color0xFF0E17F6,
     fontSize: 11 * _textRatio,
     fontWeight: FontWeight.w400,
   );
-  static TextStyle color0xFF300759FontSize18FontWeightW700 =
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize18FontWeightW700 =
       GoogleFonts.poppins(
     color: color0xFF300759,
     fontSize: 18 * _textRatio,
     fontWeight: FontWeight.w700,
   );
-  static TextStyle color0xFF9D1DF2FontSize13FontWeightW500 =
+  static TextStyle fontFamilyPoppinsColor0xFF9D1DF2FontSize13FontWeightW500 =
       GoogleFonts.poppins(
     color: color0xFF9D1DF2,
     fontSize: 13 * _textRatio,
     fontWeight: FontWeight.w500,
   );
-  static TextStyle color0xFF300759FontSize13FontWeightW700 =
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize13FontWeightW700 =
       GoogleFonts.poppins(
     color: color0xFF300759,
     fontSize: 13 * _textRatio,
     fontWeight: FontWeight.w700,
   );
-  static TextStyle color0xFF300759FontSize15FontWeitghtW500 =
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize15FontWeitghtW500 =
       GoogleFonts.poppins(
     color: color0xFF300759,
     fontSize: 15 * _textRatio,
     fontWeight: FontWeight.w500,
   );
-  static TextStyle color0xFF300759FontSize18FontWeightW500 =
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize18FontWeightW500 =
       GoogleFonts.poppins(
           color: color0xFF300759,
           fontSize: 18 * _textRatio,
           fontWeight: FontWeight.w500);
-  static TextStyle color0xFF484848FontSize11FontWeightW500 =
+  static TextStyle fontFamilyPoppinsColor0xFF484848FontSize11FontWeightW500 =
       GoogleFonts.poppins(
     color: color0xFF484848,
     fontSize: 11 * _textRatio,
     fontWeight: FontWeight.w500,
   );
-  static TextStyle color0xE00E17F6FontSize11FontWeightW500 =
+  static TextStyle fontFamilyPoppinsColor0xE00E17F6FontSize11FontWeightW500 =
       GoogleFonts.poppins(
     color: color0xE00E17F6,
     fontSize: 11 * _textRatio,
     fontWeight: FontWeight.w500,
   );
-  static TextStyle color0xFF484848FontSize18FontWeightW700 =
+  static TextStyle fontFamilyPoppinsColor0xFF484848FontSize18FontWeightW700 =
       GoogleFonts.poppins(
     color: color0xFF484848,
     fontSize: 18 * _textRatio,
     fontWeight: FontWeight.w700,
   );
-  static TextStyle pureBlackFontSize11FontWeightW500 = GoogleFonts.poppins(
+  static TextStyle fontFamilyPoppinsPureBlackFontSize11FontWeightW500 = GoogleFonts.poppins(
     color: pureBlack,
     fontSize: 11 * _textRatio,
     fontWeight: FontWeight.w500,
   );
-  static TextStyle color0xFF300759FontSize11FontWeightW500 =
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize11FontWeightW500 =
       GoogleFonts.poppins(
     color: color0xFF300759,
     fontSize: 11 * _textRatio,
     fontWeight: FontWeight.w500,
   );
-  static TextStyle color0xFF300759FontSize12FontWeightW700 =
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize12FontWeightW700 =
       GoogleFonts.poppins(
     color: color0xFF300759,
     fontSize: 12 * _textRatio,
     fontWeight: FontWeight.w700,
   );
-  static TextStyle color0xFF300759FontSize12FontWeightW600 =
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize12FontWeightW600 =
       GoogleFonts.poppins(
     color: color0xFF300759,
     fontSize: 12 * _textRatio,
     fontWeight: FontWeight.w600,
   );
-  static TextStyle color0xFF484848FontSize12FontWeightW500 = GoogleFonts.poppins(
+  static TextStyle fontFamilyPoppinsColor0xFF484848FontSize12FontWeightW500 = GoogleFonts.poppins(
     color: color0xFF484848,
     fontSize: 12 * _textRatio,
     fontWeight: FontWeight.w500,
+  );
+  static TextStyle fontFamilyLateefColor0xFF300759FontSize24FontWeightW400 =
+      GoogleFonts.lateef(
+    color: color0xFF300759,
+    fontSize: 24 * _textRatio,
+    fontWeight: FontWeight.w400,
+  );
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize14FontWeightW700 =
+      GoogleFonts.poppins(
+    color: color0xFF300759,
+    fontSize: 14 * _textRatio,
+    fontWeight: FontWeight.w700,
   );
 }

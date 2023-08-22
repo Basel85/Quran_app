@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         suffixIcon: suffixIcon,
-        hintStyle: AppThemes.color0xCC300759FontSize13FontWeightW400,
+        hintStyle: AppThemes.fontFamilyPoppinsColor0xCC300759FontSize13FontWeightW400,
         contentPadding: EdgeInsets.only(
             left: 25 * SizeConfig.horizontalBlock,
             top: 14 * SizeConfig.verticalBlock,

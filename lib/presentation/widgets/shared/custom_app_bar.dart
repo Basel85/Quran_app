@@ -54,7 +54,7 @@ class CustomAppBar extends StatelessWidget{
                 Expanded(
                   child: Text(
                     title,
-                    style: AppThemes.color0xFF300759FontSize24FontWeightW700,
+                    style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize24FontWeightW700,
                   ),
                 ),
                 if (actionsIcon != null) ...[

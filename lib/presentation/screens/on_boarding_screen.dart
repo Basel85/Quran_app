@@ -25,14 +25,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           Text(
             "Quran App",
-            style: AppThemes.color0xFF300759FontSize24FontWeightW700,
+            style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize24FontWeightW700,
           ),
           SizedBox(
             height: 6 * SizeConfig.verticalBlock,
           ),
           Text(
             "Learn Quran every day and\n recite once everyday",
-            style: AppThemes.color0xFF9D1DF2FontSize13FontWeightW700,
+            style: AppThemes.fontFamilyPoppinsColor0xFF9D1DF2FontSize13FontWeightW700,
             textAlign: TextAlign.center,
           ),
           SizedBox(
@@ -93,7 +93,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       child: Text(
                         "Get Started",
                         style:
-                            AppThemes.color0xFFDAD0E1FontSize18FontWeightW600,
+                            AppThemes.fontFamilyPoppinsColor0xFFDAD0E1FontSize18FontWeightW600,
                       ),
                     ),
                   ))

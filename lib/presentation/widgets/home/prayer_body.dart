@@ -59,21 +59,21 @@ class PrayerBody extends StatelessWidget {
                 rowHeight: 30 * SizeConfig.verticalBlock,
                 calendarStyle: CalendarStyle(
                     weekendTextStyle:
-                        AppThemes.color0xFF484848FontSize11FontWeightW500,
+                        AppThemes.fontFamilyPoppinsColor0xFF484848FontSize11FontWeightW500,
                     defaultTextStyle:
-                        AppThemes.pureBlackFontSize11FontWeightW500,
+                        AppThemes.fontFamilyPoppinsPureBlackFontSize11FontWeightW500,
                     outsideDaysVisible: false,
                     tablePadding: EdgeInsets.only(
                       left: 13 * SizeConfig.horizontalBlock,
                       right: 13 * SizeConfig.horizontalBlock,
                     ),
                     weekNumberTextStyle:
-                        AppThemes.color0xFF484848FontSize11FontWeightW500),
+                        AppThemes.fontFamilyPoppinsColor0xFF484848FontSize11FontWeightW500),
                 daysOfWeekStyle: DaysOfWeekStyle(
                     weekdayStyle:
-                        AppThemes.color0xFF484848FontSize11FontWeightW500,
+                        AppThemes.fontFamilyPoppinsColor0xFF484848FontSize11FontWeightW500,
                     weekendStyle:
-                        AppThemes.color0xFF484848FontSize11FontWeightW500),
+                        AppThemes.fontFamilyPoppinsColor0xFF484848FontSize11FontWeightW500),
                 headerStyle: HeaderStyle(
                     titleTextFormatter: (date, locale) =>
                         DateFormat.yMMM(locale).format(date),
@@ -101,7 +101,7 @@ class PrayerBody extends StatelessWidget {
                     formatButtonVisible: false,
                     titleCentered: true,
                     titleTextStyle:
-                        AppThemes.color0xFF484848FontSize18FontWeightW700),
+                        AppThemes.fontFamilyPoppinsColor0xFF484848FontSize18FontWeightW700),
                 focusedDay: state is CalendarDaySelectedState
                     ? state.focusedDay
                     : DateTime.now(),
@@ -170,7 +170,7 @@ class PrayerBody extends StatelessWidget {
                 Text(
                   "Direction",
                   textAlign: TextAlign.center,
-                  style: AppThemes.color0xFF300759FontSize12FontWeightW700,
+                  style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize12FontWeightW700,
                 ),
                 SvgPicture.asset(
                   AppAssets.directionIcon,

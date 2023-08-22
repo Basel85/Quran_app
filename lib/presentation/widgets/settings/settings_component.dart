@@ -34,7 +34,7 @@ class SettingsComponent extends StatelessWidget {
                           settingsComponentName,
                           textAlign: TextAlign.center,
                           style:
-                              AppThemes.color0xFF300759FontSize18FontWeightW500,
+                              AppThemes.fontFamilyPoppinsColor0xFF300759FontSize18FontWeightW500,
                         ),
                         SizedBox(
                           height: 30 * SizeConfig.verticalBlock,
@@ -63,7 +63,7 @@ class SettingsComponent extends StatelessWidget {
         child: Text(
           settingsComponentName,
           textAlign: TextAlign.center,
-          style: AppThemes.color0xFF300759FontSize18FontWeightW500,
+          style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize18FontWeightW500,
         ),
       ),
     );

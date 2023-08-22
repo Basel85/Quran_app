@@ -12,11 +12,11 @@ class PrayerTimesComponent extends StatelessWidget {
         children: [
           TextSpan(
             text: "$prayer ",
-            style: AppThemes.color0xFF300759FontSize12FontWeightW600
+            style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize12FontWeightW600
           ),
           TextSpan(
             text: ' 5:55am',
-            style: AppThemes.color0xFF484848FontSize12FontWeightW500
+            style: AppThemes.fontFamilyPoppinsColor0xFF484848FontSize12FontWeightW500
           ),
         ],
       ),

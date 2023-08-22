@@ -22,7 +22,7 @@ class SelectedAndTodayDayBuilder extends StatelessWidget {
         child: Text(
           day.day.toString(),
           textAlign: TextAlign.center,
-          style: AppThemes.color0xFF300759FontSize11FontWeightW500,
+          style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize11FontWeightW500,
         ),
       ),
     );
