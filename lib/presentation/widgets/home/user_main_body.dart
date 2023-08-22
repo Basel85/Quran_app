@@ -1,10 +1,26 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_app/bussiness_logic/surah/surah_cubit.dart';
+import 'package:quran_app/bussiness_logic/surah/surah_states.dart';
+import 'package:quran_app/presentation/widgets/shared/custom_circluar_progress_indicator.dart';
 import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/size_config.dart';
 
-class UserMainBody extends StatelessWidget {
+class UserMainBody extends StatefulWidget {
   final String displayName;
   const UserMainBody({super.key, required this.displayName});
+
+  @override
+  State<UserMainBody> createState() => _UserMainBodyState();
+}
+
+class _UserMainBodyState extends State<UserMainBody> {
+  @override
+  initState() {
+    super.initState();
+    SurahCubit.get(context).getListOfSurahs();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +35,7 @@ class UserMainBody extends StatelessWidget {
           ),
           Expanded(
             child: DefaultTabController(
-              length: 4,
+              length: 1,
               child: NestedScrollView(
                   headerSliverBuilder: (context, innerBoxIsScrolled) => [
                         SliverPadding(
@@ -37,7 +53,7 @@ class UserMainBody extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
                                 Text(
-                                  displayName,
+                                  widget.displayName,
                                   style: AppThemes
                                       .fontFamilyPoppinsColor0xFF300759FontSize18FontWeightW700,
                                   textAlign: TextAlign.center,
@@ -106,63 +122,127 @@ class UserMainBody extends StatelessWidget {
                         EdgeInsets.only(top: 12 * SizeConfig.verticalBlock),
                     child: TabBarView(
                       children: [
-                        ListView.builder(
-                          itemBuilder: (_, index) => Container(
-                              padding: EdgeInsets.only(
-                                  left: 43 * SizeConfig.horizontalBlock,
-                                  right: 10 * SizeConfig.horizontalBlock,
-                                  top: 12 * SizeConfig.verticalBlock,
-                                  bottom: 20 * SizeConfig.verticalBlock),
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          color: AppThemes.color0xFF9D1DF2
-                                              .withOpacity(0.1),
-                                          width: 1 * SizeConfig.textRatio))),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Al-Fatihah",
-                                        style: AppThemes
-                                            .fontFamilyPoppinsColor0xFF300759FontSize14FontWeightW700,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      Text(
-                                        "Verse 7",
-                                        style: AppThemes
-                                            .fontFamilyPoppinsColor0xFF300759FontSize11FontWeightW500,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      SizedBox(
-                                        height: 2 * SizeConfig.verticalBlock,
-                                      ),
-                                      Text(
-                                        "(The Opener)",
-                                        style: AppThemes
-                                            .fontFamilyPoppinsColor0xFF300759FontSize11FontWeightW500,
-                                        textAlign: TextAlign.center,
-                                      )
-                                    ],
+                        BlocBuilder<SurahCubit, SurahState>(
+                            buildWhen: (previous, current) =>
+                                current is SurahLoadingState ||
+                                current is SurahSuccessState ||
+                                current is SurahErrorState,
+                            builder: (_, state) {
+                              if (state is SurahSuccessState) {
+                                return RefreshIndicator(
+                                  backgroundColor: AppThemes.color0xFFDAD0E1,
+                                  color: AppThemes.color0xFF300759,
+                                  strokeWidth: 2 * SizeConfig.horizontalBlock,
+                                  displacement: 40 * SizeConfig.verticalBlock,
+                                  onRefresh: () =>
+                                      SurahCubit.get(context).getListOfSurahs(),
+                                  child: ListView.builder(
+                                    itemBuilder: (_, index) => GestureDetector(
+                                      onTap: () => Navigator.pushNamed(
+                                          context, '/surah',
+                                          arguments: {
+                                            "surahNumber": state
+                                                .surahs[index].surahNumber,
+                                          }),
+                                      child: Container(
+                                          padding: EdgeInsets.only(
+                                              left: 43 *
+                                                  SizeConfig.horizontalBlock,
+                                              right: 10 *
+                                                  SizeConfig.horizontalBlock,
+                                              top:
+                                                  12 * SizeConfig.verticalBlock,
+                                              bottom: 20 *
+                                                  SizeConfig.verticalBlock),
+                                          decoration: BoxDecoration(
+                                              border: Border(
+                                                  bottom: BorderSide(
+                                                      color: AppThemes
+                                                          .color0xFF9D1DF2
+                                                          .withOpacity(0.1),
+                                                      width: 1 *
+                                                          SizeConfig
+                                                              .textRatio))),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    state.surahs[index]
+                                                        .surahEnglishName,
+                                                    style: AppThemes
+                                                        .fontFamilyPoppinsColor0xFF300759FontSize14FontWeightW700,
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                  Text(
+                                                    "Verse ${state.surahs[index].numberOfAyahs}",
+                                                    style: AppThemes
+                                                        .fontFamilyPoppinsColor0xFF300759FontSize11FontWeightW500,
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 2 *
+                                                        SizeConfig
+                                                            .verticalBlock,
+                                                  ),
+                                                  Text(
+                                                    "(${state.surahs[index].surahEnglishNameTranslation})",
+                                                    style: AppThemes
+                                                        .fontFamilyPoppinsColor0xFF300759FontSize11FontWeightW500,
+                                                    textAlign: TextAlign.center,
+                                                  )
+                                                ],
+                                              ),
+                                              Text(
+                                                state.surahs[index].surahName,
+                                                textAlign: TextAlign.center,
+                                                style: AppThemes
+                                                    .fontFamilyLateefColor0xFF300759FontSize24FontWeightW400,
+                                              )
+                                            ],
+                                          )),
+                                    ),
+                                    itemCount: state.surahs.length,
                                   ),
-                                  Text(
-                                    "ةحَتِافَلْا",
+                                );
+                              } else if (state is SurahErrorState) {
+                                return Center(
+                                  child: Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: "${state.errorMessage}\n",
+                                          style: AppThemes
+                                              .fontFamilyPoppinsColor0xFF300759FontSize14FontWeightW700,
+                                        ),
+                                        TextSpan(
+                                          text: "Tap to reload",
+                                          style: AppThemes
+                                              .fontFamilyPoppinsColor0xFF0E17F6FontSize13FontWeightW700,
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () =>
+                                                SurahCubit.get(context)
+                                                    .getListOfSurahs(),
+                                        ),
+                                      ],
+                                    ),
                                     textAlign: TextAlign.center,
-                                    style: AppThemes
-                                        .fontFamilyLateefColor0xFF300759FontSize24FontWeightW400,
-                                  )
-                                ],
-                              )),
-                          itemCount: 9,
-                        ),
+                                  ),
+                                );
+                              } else {
+                                return const CustomCircularProgressIndicator();
+                              }
+                            })
+
                         // const Text("Para"),
                         // const Text("Page"),
                         // const Text("Hijb"),

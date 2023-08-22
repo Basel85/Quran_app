@@ -6,17 +6,22 @@ class SurahModel {
   final String surahEnglishName;
   final String surahEnglishNameTranslation;
   final int numberOfAyahs;
-  final List<AyahModel>? surahAyahs;
+  final List<AyahModel> surahAyahs;
 
-  SurahModel(this.surahNumber, this.surahName, this.surahEnglishName, this.surahEnglishNameTranslation, this.numberOfAyahs, this.surahAyahs);
-  factory SurahModel.fromJson(Map<String,dynamic> surahJson){
+  SurahModel(
+      {required this.surahNumber,
+      required this.surahName,
+      required this.surahEnglishName,
+      required this.surahEnglishNameTranslation,
+      required this.numberOfAyahs,
+      this.surahAyahs = const []});
+  factory SurahModel.getListOfSurahFromJson(Map<String, dynamic> surahJson) {
     return SurahModel(
-      surahJson['number'],
-      surahJson['name'],
-      surahJson['englishName'],
-      surahJson['englishNameTranslation'],
-      surahJson['numberOfAyahs'],
-      (surahJson['ayahs'] as List).map((ayah) => AyahModel.fromJson(ayah)).toList()
+      surahNumber: surahJson['number'],
+      surahName: surahJson['name'],
+      surahEnglishName: surahJson['englishName'],
+      surahEnglishNameTranslation: surahJson['englishNameTranslation'],
+      numberOfAyahs: surahJson['numberOfAyahs'],
     );
   }
 }

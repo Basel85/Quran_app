@@ -4,7 +4,7 @@ import 'package:quran_app/utils/app_assets.dart';
 import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/size_config.dart';
 
-class CustomAppBar extends StatelessWidget{
+class CustomAppBar extends StatelessWidget {
   final String title;
   final bool isHome;
   final bool isNotMainUserScreenAndNonBottomNavigationBarScreens;
@@ -38,12 +38,20 @@ class CustomAppBar extends StatelessWidget{
                         onTap: () {
                           Scaffold.of(context).openDrawer();
                         },
-                        child: SvgPicture.asset(AppAssets.menuIcon))
+                        child: SvgPicture.asset(
+                          AppAssets.menuIcon,
+                          width: 21 * SizeConfig.horizontalBlock,
+                          height: 15 * SizeConfig.verticalBlock,
+                        ))
                   ]
                 ] else ...[
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: SvgPicture.asset(AppAssets.backIcon),
+                    child: SvgPicture.asset(
+                      AppAssets.backIcon,
+                      width: 25 * SizeConfig.horizontalBlock,
+                      height: 25.02 * SizeConfig.verticalBlock,
+                    ),
                   ),
                 ],
                 if (!isNotMainUserScreenAndNonBottomNavigationBarScreens) ...[
@@ -54,7 +62,8 @@ class CustomAppBar extends StatelessWidget{
                 Expanded(
                   child: Text(
                     title,
-                    style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize24FontWeightW700,
+                    style: AppThemes
+                        .fontFamilyPoppinsColor0xFF300759FontSize24FontWeightW700,
                   ),
                 ),
                 if (actionsIcon != null) ...[

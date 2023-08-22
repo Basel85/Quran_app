@@ -4,6 +4,7 @@ import 'package:quran_app/presentation/screens/login_screen.dart';
 import 'package:quran_app/presentation/screens/notification_screen.dart';
 import 'package:quran_app/presentation/screens/register_screen.dart';
 import 'package:quran_app/presentation/screens/settings_screen.dart';
+import 'package:quran_app/presentation/screens/surah_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -16,6 +17,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_)=> const NotificationScreen());
       case '/settings':
         return MaterialPageRoute(builder: (_)=> const SettingsScreen());
+      case '/surah':
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(builder: (_) {
+          return SurahScreen(surahNumber: args['surahNumber'],);
+        },settings: settings);
       default:
         return MaterialPageRoute(builder: (_) => const InitialScreen());
 
