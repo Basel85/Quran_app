@@ -11,22 +11,48 @@ class SurahCubit extends Cubit<SurahState> {
 
   static SurahCubit get(context) => BlocProvider.of(context);
 
+  static const String _timeOutExceptionMessage =
+      "Loading time out please try again";
+  static const String _socketExceptionMessage = "No internet connection Please check your internet connection and try again";
+  static const String _unexpectedExceptionMessage =
+      "Something went wrong please try again later";
+
   Future<void> getListOfSurahs() async {
     try {
-      emit(SurahLoadingState());
+      emit(SurahGetListOfSurahsLoadingState());
       final surahs = await SurahRequests.getListOfSurahs();
-      emit(SurahSuccessState(surahs: surahs));
+      emit(SurahGetListOfSurahsSuccessState(surahs: surahs));
     } on TimeoutException catch (_) {
-      emit(SurahErrorState(errorMessage: "Loading time out please try again"));
+      emit(SurahGetListOfSurahsErrorState(
+          errorMessage: _timeOutExceptionMessage));
     } on AppCustomException catch (exception) {
-      emit(SurahErrorState(errorMessage: exception.message));
+      emit(SurahGetListOfSurahsErrorState(errorMessage: exception.message));
     } on SocketException catch (_) {
-      emit(SurahErrorState(
+      emit(SurahGetListOfSurahsErrorState(
           errorMessage:
-              "No internet connection Please check your internet connection and try again"));
+              _socketExceptionMessage));
     } catch (e) {
-      emit(SurahErrorState(
-          errorMessage: "Something went wrong please try again later"));
+      emit(SurahGetListOfSurahsErrorState(
+          errorMessage: _unexpectedExceptionMessage));
+    }
+  }
+  Future<void> getSurahAyahs() async {
+    try {
+      emit(SurahGetSurahAyahsLoadingState());
+      final surahs = await SurahRequests.getListOfSurahs();
+      emit(SurahGetListOfSurahsSuccessState(surahs: surahs));
+    } on TimeoutException catch (_) {
+      emit(SurahGetSurahAyahsErrorState(
+          errorMessage: _timeOutExceptionMessage));
+    } on AppCustomException catch (exception) {
+      emit(SurahGetSurahAyahsErrorState(errorMessage: exception.message));
+    } on SocketException catch (_) {
+      emit(SurahGetSurahAyahsErrorState(
+          errorMessage:
+              _socketExceptionMessage));
+    } catch (e) {
+      emit(SurahGetSurahAyahsErrorState(
+          errorMessage: _unexpectedExceptionMessage));
     }
   }
 }

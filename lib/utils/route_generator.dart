@@ -14,17 +14,24 @@ class RouteGenerator {
       case '/register':
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case '/notification':
-        return MaterialPageRoute(builder: (_)=> const NotificationScreen());
+        return MaterialPageRoute(builder: (_) => const NotificationScreen());
       case '/settings':
-        return MaterialPageRoute(builder: (_)=> const SettingsScreen());
+        return MaterialPageRoute(builder: (_) => const SettingsScreen());
       case '/surah':
         final args = settings.arguments as Map<String, dynamic>;
-        return MaterialPageRoute(builder: (_) {
-          return SurahScreen(surahNumber: args['surahNumber'],);
-        },settings: settings);
+        return MaterialPageRoute(
+            builder: (_) {
+              return SurahScreen(
+                surahNumber: args['surahNumber'],
+                surahEnglishName: args['surahEnglishName'],
+                surahEnglishNameTranslation:
+                    args['surahEnglishNameTranslation'],
+                numberOfAyahs: args['numberOfAyahs'],
+              );
+            },
+            settings: settings);
       default:
         return MaterialPageRoute(builder: (_) => const InitialScreen());
-
     }
   }
 }

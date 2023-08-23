@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/bussiness_logic/surah/surah_cubit.dart';
 import 'package:quran_app/bussiness_logic/surah/surah_states.dart';
 import 'package:quran_app/presentation/widgets/shared/custom_circluar_progress_indicator.dart';
+import 'package:quran_app/presentation/widgets/shared/quran_meta_data_component.dart';
 import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/size_config.dart';
 
@@ -143,6 +144,12 @@ class _UserMainBodyState extends State<UserMainBody> {
                                           arguments: {
                                             "surahNumber": state
                                                 .surahs[index].surahNumber,
+                                            "surahEnglishName": state
+                                                .surahs[index]
+                                                .surahEnglishName,
+                                            "surahEnglishNameTranslation": state.surahs[index].surahEnglishNameTranslation,
+                                            "numberOfAyahs": state
+                                                .surahs[index].numberOfAyahs,
                                           }),
                                       child: Container(
                                           padding: EdgeInsets.only(
@@ -163,52 +170,20 @@ class _UserMainBodyState extends State<UserMainBody> {
                                                       width: 1 *
                                                           SizeConfig
                                                               .textRatio))),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    state.surahs[index]
-                                                        .surahEnglishName,
-                                                    style: AppThemes
-                                                        .fontFamilyPoppinsColor0xFF300759FontSize14FontWeightW700,
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                  Text(
-                                                    "Verse ${state.surahs[index].numberOfAyahs}",
-                                                    style: AppThemes
-                                                        .fontFamilyPoppinsColor0xFF300759FontSize11FontWeightW500,
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 2 *
-                                                        SizeConfig
-                                                            .verticalBlock,
-                                                  ),
-                                                  Text(
-                                                    "(${state.surahs[index].surahEnglishNameTranslation})",
-                                                    style: AppThemes
-                                                        .fontFamilyPoppinsColor0xFF300759FontSize11FontWeightW500,
-                                                    textAlign: TextAlign.center,
-                                                  )
-                                                ],
-                                              ),
-                                              Text(
-                                                state.surahs[index].surahName,
-                                                textAlign: TextAlign.center,
-                                                style: AppThemes
-                                                    .fontFamilyLateefColor0xFF300759FontSize24FontWeightW400,
-                                              )
-                                            ],
+                                          child: QuranMetaDataComponent(
+                                            surahEnglishName: state
+                                                .surahs[index].surahEnglishName,
+                                            surahEnglishNameTranslation: state
+                                                .surahs[index]
+                                                .surahEnglishNameTranslation,
+                                            numberOfAyahs: state
+                                                .surahs[index].numberOfAyahs,
+                                            trailing: Text(
+                                              state.surahs[index].surahName,
+                                              textAlign: TextAlign.center,
+                                              style: AppThemes
+                                                  .fontFamilyLateefColor0xFF300759FontSize24FontWeightW400,
+                                            ),
                                           )),
                                     ),
                                     itemCount: state.surahs.length,
