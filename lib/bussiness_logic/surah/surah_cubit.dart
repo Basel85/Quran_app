@@ -36,7 +36,7 @@ class SurahCubit extends Cubit<SurahState> {
           errorMessage: _unexpectedExceptionMessage));
     }
   }
-  Future<void> getSurahAyahs(int surahNumber) async {
+  Future<void> getSurahAyahs({required int surahNumber}) async {
     try {
       emit(SurahGetSurahAyahsLoadingState());
       final ayahs = await SurahRequests.getSurahAyahs(surahNumber);

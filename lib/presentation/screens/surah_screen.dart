@@ -30,6 +30,7 @@ class SurahScreen extends StatefulWidget {
 class _SurahScreenState extends State<SurahScreen> {
   @override
   void initState() {
+    SurahCubit.get(context).getSurahAyahs(surahNumber: widget.surahNumber);
     super.initState();
   }
 
@@ -74,8 +75,8 @@ class _SurahScreenState extends State<SurahScreen> {
                     return CustomRefreshIndicator(
                       paddingLeft: 6 * SizeConfig.horizontalBlock,
                       paddingRight: 25 * SizeConfig.horizontalBlock,
-                      onRefresh: () =>
-                          Future.delayed(const Duration(seconds: 3)),
+                      onRefresh: () => SurahCubit.get(context)
+                          .getSurahAyahs(surahNumber: widget.surahNumber),
                       itemBuilder: (_, index) => Padding(
                         padding: EdgeInsets.only(
                             bottom: 39 * SizeConfig.verticalBlock),
@@ -91,7 +92,8 @@ class _SurahScreenState extends State<SurahScreen> {
                   } else if (state is SurahGetSurahAyahsErrorState) {
                     return ApiErrorMessageComponent(
                       errorMessage: state.errorMessage,
-                      onTap: () => Future.delayed(const Duration(seconds: 3)),
+                      onTap: () => SurahCubit.get(context)
+                          .getSurahAyahs(surahNumber: widget.surahNumber),
                     );
                   } else {
                     return const CustomCircularProgressIndicator();
