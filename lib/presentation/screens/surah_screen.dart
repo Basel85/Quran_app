@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_app/bussiness_logic/surah/surah_cubit.dart';
+import 'package:quran_app/bussiness_logic/surah/surah_states.dart';
+import 'package:quran_app/presentation/widgets/shared/api_error_message_component.dart';
 import 'package:quran_app/presentation/widgets/shared/column_located_on_the_first_body.dart';
 import 'package:quran_app/presentation/widgets/shared/custom_app_bar.dart';
 import 'package:quran_app/presentation/widgets/shared/custom_circluar_progress_indicator.dart';
+import 'package:quran_app/presentation/widgets/shared/custom_refresh_indicator.dart';
 import 'package:quran_app/presentation/widgets/shared/quran_meta_data_component.dart';
+import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/size_config.dart';
 
 class SurahScreen extends StatefulWidget {
@@ -24,9 +30,9 @@ class SurahScreen extends StatefulWidget {
 class _SurahScreenState extends State<SurahScreen> {
   @override
   void initState() {
-    
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +63,42 @@ class _SurahScreenState extends State<SurahScreen> {
             SizedBox(
               height: 18 * SizeConfig.verticalBlock,
             ),
-            const Expanded(child: CustomCircularProgressIndicator())
+            Expanded(
+              child: BlocBuilder<SurahCubit, SurahState>(
+                buildWhen: (previous, current) =>
+                    current is SurahGetSurahAyahsLoadingState ||
+                    current is SurahGetSurahAyahsSuccessState ||
+                    current is SurahGetSurahAyahsErrorState,
+                builder: (_, state) {
+                  if (state is SurahGetSurahAyahsSuccessState) {
+                    return CustomRefreshIndicator(
+                      paddingLeft: 6 * SizeConfig.horizontalBlock,
+                      paddingRight: 25 * SizeConfig.horizontalBlock,
+                      onRefresh: () =>
+                          Future.delayed(const Duration(seconds: 3)),
+                      itemBuilder: (_, index) => Padding(
+                        padding: EdgeInsets.only(
+                            bottom: 39 * SizeConfig.verticalBlock),
+                        child: Text(
+                          state.surahAyahs[index].ayahText,
+                          style: AppThemes
+                              .fontFamilyPoppinsColor0xFF300759FontSize24FontWeightW400,
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                      itemCount: state.surahAyahs.length,
+                    );
+                  } else if (state is SurahGetSurahAyahsErrorState) {
+                    return ApiErrorMessageComponent(
+                      errorMessage: state.errorMessage,
+                      onTap: () => Future.delayed(const Duration(seconds: 3)),
+                    );
+                  } else {
+                    return const CustomCircularProgressIndicator();
+                  }
+                },
+              ),
+            )
           ],
         ));
   }

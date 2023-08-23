@@ -142,7 +142,8 @@ class AppThemes {
     fontSize: 18 * _textRatio,
     fontWeight: FontWeight.w700,
   );
-  static TextStyle fontFamilyPoppinsPureBlackFontSize11FontWeightW500 = GoogleFonts.poppins(
+  static TextStyle fontFamilyPoppinsPureBlackFontSize11FontWeightW500 =
+      GoogleFonts.poppins(
     color: pureBlack,
     fontSize: 11 * _textRatio,
     fontWeight: FontWeight.w500,
@@ -165,7 +166,8 @@ class AppThemes {
     fontSize: 12 * _textRatio,
     fontWeight: FontWeight.w600,
   );
-  static TextStyle fontFamilyPoppinsColor0xFF484848FontSize12FontWeightW500 = GoogleFonts.poppins(
+  static TextStyle fontFamilyPoppinsColor0xFF484848FontSize12FontWeightW500 =
+      GoogleFonts.poppins(
     color: color0xFF484848,
     fontSize: 12 * _textRatio,
     fontWeight: FontWeight.w500,
@@ -194,5 +196,10 @@ class AppThemes {
     fontSize: 13 * _textRatio,
     fontWeight: FontWeight.w500,
   );
-  
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize24FontWeightW400 =
+      GoogleFonts.lateef(
+    color: color0xFF300759,
+    fontSize: 24 * _textRatio,
+    fontWeight: FontWeight.w400,
+  );
 }

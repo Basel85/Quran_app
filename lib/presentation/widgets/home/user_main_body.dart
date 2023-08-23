@@ -1,9 +1,10 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/bussiness_logic/surah/surah_cubit.dart';
 import 'package:quran_app/bussiness_logic/surah/surah_states.dart';
+import 'package:quran_app/presentation/widgets/shared/api_error_message_component.dart';
 import 'package:quran_app/presentation/widgets/shared/custom_circluar_progress_indicator.dart';
+import 'package:quran_app/presentation/widgets/shared/custom_refresh_indicator.dart';
 import 'package:quran_app/presentation/widgets/shared/quran_meta_data_component.dart';
 import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/size_config.dart';
@@ -125,94 +126,69 @@ class _UserMainBodyState extends State<UserMainBody> {
                       children: [
                         BlocBuilder<SurahCubit, SurahState>(
                             buildWhen: (previous, current) =>
-                                current is SurahLoadingState ||
-                                current is SurahSuccessState ||
-                                current is SurahErrorState,
+                                current is SurahGetListOfSurahsLoadingState ||
+                                current is SurahGetListOfSurahsSuccessState ||
+                                current is SurahGetListOfSurahsErrorState,
                             builder: (_, state) {
-                              if (state is SurahSuccessState) {
-                                return RefreshIndicator(
-                                  backgroundColor: AppThemes.color0xFFDAD0E1,
-                                  color: AppThemes.color0xFF300759,
-                                  strokeWidth: 2 * SizeConfig.horizontalBlock,
-                                  displacement: 40 * SizeConfig.verticalBlock,
+                              if (state is SurahGetListOfSurahsSuccessState) {
+                                return CustomRefreshIndicator(
                                   onRefresh: () =>
                                       SurahCubit.get(context).getListOfSurahs(),
-                                  child: ListView.builder(
-                                    itemBuilder: (_, index) => GestureDetector(
-                                      onTap: () => Navigator.pushNamed(
-                                          context, '/surah',
-                                          arguments: {
-                                            "surahNumber": state
-                                                .surahs[index].surahNumber,
-                                            "surahEnglishName": state
-                                                .surahs[index]
-                                                .surahEnglishName,
-                                            "surahEnglishNameTranslation": state.surahs[index].surahEnglishNameTranslation,
-                                            "numberOfAyahs": state
-                                                .surahs[index].numberOfAyahs,
-                                          }),
-                                      child: Container(
-                                          padding: EdgeInsets.only(
-                                              left: 43 *
-                                                  SizeConfig.horizontalBlock,
-                                              right: 10 *
-                                                  SizeConfig.horizontalBlock,
-                                              top:
-                                                  12 * SizeConfig.verticalBlock,
-                                              bottom: 20 *
-                                                  SizeConfig.verticalBlock),
-                                          decoration: BoxDecoration(
-                                              border: Border(
-                                                  bottom: BorderSide(
-                                                      color: AppThemes
-                                                          .color0xFF9D1DF2
-                                                          .withOpacity(0.1),
-                                                      width: 1 *
-                                                          SizeConfig
-                                                              .textRatio))),
-                                          child: QuranMetaDataComponent(
-                                            surahEnglishName: state
-                                                .surahs[index].surahEnglishName,
-                                            surahEnglishNameTranslation: state
-                                                .surahs[index]
-                                                .surahEnglishNameTranslation,
-                                            numberOfAyahs: state
-                                                .surahs[index].numberOfAyahs,
-                                            trailing: Text(
-                                              state.surahs[index].surahName,
-                                              textAlign: TextAlign.center,
-                                              style: AppThemes
-                                                  .fontFamilyLateefColor0xFF300759FontSize24FontWeightW400,
-                                            ),
-                                          )),
-                                    ),
-                                    itemCount: state.surahs.length,
+                                  itemBuilder: (_, index) => GestureDetector(
+                                    onTap: () => Navigator.pushNamed(
+                                        context, '/surah',
+                                        arguments: {
+                                          "surahNumber":
+                                              state.surahs[index].surahNumber,
+                                          "surahEnglishName": state
+                                              .surahs[index].surahEnglishName,
+                                          "surahEnglishNameTranslation": state
+                                              .surahs[index]
+                                              .surahEnglishNameTranslation,
+                                          "numberOfAyahs":
+                                              state.surahs[index].numberOfAyahs,
+                                        }),
+                                    child: Container(
+                                        padding: EdgeInsets.only(
+                                            left:
+                                                43 * SizeConfig.horizontalBlock,
+                                            right:
+                                                10 * SizeConfig.horizontalBlock,
+                                            top: 12 * SizeConfig.verticalBlock,
+                                            bottom:
+                                                20 * SizeConfig.verticalBlock),
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: AppThemes
+                                                        .color0xFF9D1DF2
+                                                        .withOpacity(0.1),
+                                                    width: 1 *
+                                                        SizeConfig.textRatio))),
+                                        child: QuranMetaDataComponent(
+                                          surahEnglishName: state
+                                              .surahs[index].surahEnglishName,
+                                          surahEnglishNameTranslation: state
+                                              .surahs[index]
+                                              .surahEnglishNameTranslation,
+                                          numberOfAyahs:
+                                              state.surahs[index].numberOfAyahs,
+                                          trailing: Text(
+                                            state.surahs[index].surahName,
+                                            textAlign: TextAlign.center,
+                                            style: AppThemes
+                                                .fontFamilyLateefColor0xFF300759FontSize24FontWeightW400,
+                                          ),
+                                        )),
                                   ),
+                                  itemCount: state.surahs.length,
                                 );
-                              } else if (state is SurahErrorState) {
-                                return Center(
-                                  child: Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: "${state.errorMessage}\n",
-                                          style: AppThemes
-                                              .fontFamilyPoppinsColor0xFF300759FontSize14FontWeightW700,
-                                        ),
-                                        TextSpan(
-                                          text: "Tap to reload",
-                                          style: AppThemes
-                                              .fontFamilyPoppinsColor0xFF0E17F6FontSize13FontWeightW700,
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () =>
-                                                SurahCubit.get(context)
-                                                    .getListOfSurahs(),
-                                        ),
-                                      ],
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                );
+                              } else if (state
+                                  is SurahGetListOfSurahsErrorState) {
+                                return ApiErrorMessageComponent(
+                                    errorMessage: state.errorMessage,
+                                    onTap: () => SurahCubit.get(context)
+                                        .getListOfSurahs());
                               } else {
                                 return const CustomCircularProgressIndicator();
                               }

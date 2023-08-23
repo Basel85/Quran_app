@@ -1,15 +1,9 @@
 class AyahModel {
-  final int ayahNumber;
-  final String ayahAudioUrl;
-  final String ayahAudioSecondaryUrl;
+  final int ayahNumberInSurah;
   final String ayahText;
-  AyahModel(this.ayahNumber, this.ayahAudioUrl, this.ayahAudioSecondaryUrl, this.ayahText);
-  factory AyahModel.fromJson(Map<String,dynamic> ayahJson){
+  AyahModel({required this.ayahNumberInSurah, required this.ayahText});
+  factory AyahModel.fromJson(Map<String, dynamic> ayahJson) {
     return AyahModel(
-      ayahJson['number'],
-      ayahJson['audio'],
-      ayahJson['audioSecondary'],
-      ayahJson['text']
-    );
+        ayahNumberInSurah: ayahJson['number'], ayahText: ayahJson['text']);
   }
 }
