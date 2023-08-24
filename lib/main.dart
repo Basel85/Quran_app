@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: Keys.navigatorKey,
       theme: ThemeData(
         scaffoldBackgroundColor: AppThemes.color0xFFDAD0E1,
+        useMaterial3: true
       ),
       initialRoute: '/',
     );
