@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/bussiness_logic/surah/surah_cubit.dart';
 import 'package:quran_app/bussiness_logic/surah/surah_states.dart';
+import 'package:quran_app/bussiness_logic/ayah_selection/ayah_selection_cubit.dart';
+import 'package:quran_app/bussiness_logic/ayah_selection/ayah_selection_states.dart';
 import 'package:quran_app/presentation/widgets/shared/api_error_message_component.dart';
 import 'package:quran_app/presentation/widgets/shared/column_located_on_the_first_body.dart';
 import 'package:quran_app/presentation/widgets/shared/custom_app_bar.dart';
@@ -77,14 +79,17 @@ class _SurahScreenState extends State<SurahScreen> {
                       paddingRight: 25 * SizeConfig.horizontalBlock,
                       onRefresh: () => SurahCubit.get(context)
                           .getSurahAyahs(surahNumber: widget.surahNumber),
-                      itemBuilder: (_, index) => Padding(
-                        padding: EdgeInsets.only(
-                            bottom: 39 * SizeConfig.verticalBlock),
-                        child: Text(
-                          state.surahAyahs[index].ayahText,
-                          style: AppThemes
-                              .fontFamilyPoppinsColor0xFF300759FontSize24FontWeightW400,
-                          textDirection: TextDirection.rtl,
+                      itemBuilder: (_, index) => BlocBuilder<AyahSelectionCubit,AyahSelectionState>(
+                        builder:(_,ayahSelectionState)=> Container(
+                          color: AppThemes.pureWhite,
+                          margin: EdgeInsets.only(
+                              bottom: 39 * SizeConfig.verticalBlock),
+                          child: Text(
+                            state.surahAyahs[index].ayahText,
+                            style: AppThemes
+                                .fontFamilyPoppinsColor0xFF300759FontSize24FontWeightW400,
+                            textDirection: TextDirection.rtl,
+                          ),
                         ),
                       ),
                       itemCount: state.surahAyahs.length,

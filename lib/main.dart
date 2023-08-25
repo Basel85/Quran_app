@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:quran_app/bussiness_logic/auth/auth_cubit.dart';
 import 'package:quran_app/bussiness_logic/my_bloc_observer.dart';
 import 'package:quran_app/bussiness_logic/surah/surah_cubit.dart';
+import 'package:quran_app/bussiness_logic/ayah_selection/ayah_selection_cubit.dart';
 import 'package:quran_app/presentation/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
 import 'package:quran_app/presentation/cubits/calendar/calendar_cubit.dart';
 import 'package:quran_app/presentation/cubits/password_visibility/password_visibility_cubit.dart';
@@ -28,7 +29,8 @@ void main() async {
     BlocProvider<CalendarCubit>(create: (context) => CalendarCubit()),
     BlocProvider<SurahCubit>(
       create: (context) => SurahCubit(),
-    )
+    ),
+    BlocProvider<AyahSelectionCubit>(create: (context)=>AyahSelectionCubit())
   ], child: const MyApp()));
 }
 
