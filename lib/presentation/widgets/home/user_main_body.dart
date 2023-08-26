@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/bussiness_logic/surah/surah_cubit.dart';
-import 'package:quran_app/bussiness_logic/surah/surah_states.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quran_app/bussiness_logic/cubits/last_read/last_read_cubit.dart';
+import 'package:quran_app/bussiness_logic/cubits/last_read/last_read_states.dart';
+import 'package:quran_app/bussiness_logic/cubits/surah/surah_cubit.dart';
+import 'package:quran_app/bussiness_logic/cubits/surah/surah_states.dart';
 import 'package:quran_app/presentation/widgets/shared/api_error_message_component.dart';
 import 'package:quran_app/presentation/widgets/shared/custom_circluar_progress_indicator.dart';
 import 'package:quran_app/presentation/widgets/shared/custom_refresh_indicator.dart';
 import 'package:quran_app/presentation/widgets/shared/quran_meta_data_component.dart';
+import 'package:quran_app/utils/app_assets.dart';
 import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/size_config.dart';
 
@@ -18,10 +22,26 @@ class UserMainBody extends StatefulWidget {
 }
 
 class _UserMainBodyState extends State<UserMainBody> {
+  late String surahEnglishName;
+  late int ayahNumber;
   @override
   initState() {
-    super.initState();
+    LastReadCubit.get(context).getValues();
     SurahCubit.get(context).getListOfSurahs();
+    super.initState();
+  }
+
+  void navigateToSurahScreen(
+      {required int surahNumber,
+      required String surahEnglishName,
+      required String surahEnglishNameTranslation,
+      required int numberOfAyahs}) {
+    Navigator.pushNamed(context, '/surah', arguments: {
+      "surahNumber": surahNumber,
+      "surahEnglishName": surahEnglishName,
+      "surahEnglishNameTranslation": surahEnglishNameTranslation,
+      "numberOfAyahs": numberOfAyahs,
+    });
   }
 
   @override
@@ -67,19 +87,94 @@ class _UserMainBodyState extends State<UserMainBody> {
                             height: 29 * SizeConfig.verticalBlock,
                           ),
                         ),
-                        // SliverToBoxAdapter(
-                        //   child: Container(
-                        //     padding: EdgeInsets.only(
-                        //         left: 21 * SizeConfig.horizontalBlock,
-                        //         right: 18 * SizeConfig.horizontalBlock),
-                        //     decoration: ShapeDecoration(
-                        //       color: AppThemes.color0xFFE5B6F2,
-                        //       shape: RoundedRectangleBorder(
-                        //         borderRadius: BorderRadius.circular(20),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
+                        SliverToBoxAdapter(
+                          child: BlocBuilder<LastReadCubit, LastReadState>(
+                            builder: (_, state) => GestureDetector(
+                              onTap: () {
+                                if (state is LastReadSuccessState) {
+                                  navigateToSurahScreen(
+                                      surahNumber: state.surahNumber,
+                                      surahEnglishName:
+                                          state.surahEnglishName,
+                                      surahEnglishNameTranslation:
+                                          state.surahEnglishNameTranslation,
+                                      numberOfAyahs: state.numberOfAyahs);
+                                }
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal:
+                                        32 * SizeConfig.horizontalBlock),
+                                padding: EdgeInsets.only(
+                                  left: 21 * SizeConfig.horizontalBlock,
+                                  right: 18 * SizeConfig.horizontalBlock,
+                                  top: 17 * SizeConfig.verticalBlock,
+                                  bottom: 27 * SizeConfig.verticalBlock,
+                                ),
+                                decoration: ShapeDecoration(
+                                  color: AppThemes.color0xFFE5B6F2,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              AppAssets.readIcon,
+                                              width: 16 *
+                                                  SizeConfig.horizontalBlock,
+                                              height: 13.1 *
+                                                  SizeConfig.verticalBlock,
+                                            ),
+                                            SizedBox(
+                                              width: 13 *
+                                                  SizeConfig.horizontalBlock,
+                                            ),
+                                            Text(
+                                              "Last Read",
+                                              style: AppThemes
+                                                  .fontFamilyPoppinsColor0xFF300759FontSize13FontWeightW500,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 12 * SizeConfig.verticalBlock,
+                                        ),
+                                        Text.rich(TextSpan(children: [
+                                          TextSpan(
+                                            text: "Waiting...\n",
+                                            style: AppThemes
+                                                .fontFamilyPoppinsColor0xFF300759FontSize13FontWeightW700,
+                                          ),
+                                          TextSpan(
+                                            text: "Waiting...",
+                                            style: AppThemes
+                                                .fontFamilyPoppinsColor0xFF300759FontSize10FontWeightW500,
+                                          )
+                                        ]))
+                                      ],
+                                    ),
+                                    SvgPicture.asset(
+                                      AppAssets.bookIcon,
+                                      width: 74 * SizeConfig.horizontalBlock,
+                                      height: 84 * SizeConfig.verticalBlock,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                         SliverPadding(
                           padding: EdgeInsets.only(
                               left: 35 * SizeConfig.horizontalBlock,
@@ -100,9 +195,6 @@ class _UserMainBodyState extends State<UserMainBody> {
                                 child: TabBar(
                                   tabs: const [
                                     Tab(text: "Surah"),
-                                    // Tab(text: "Para"),
-                                    // Tab(text: "Page"),
-                                    // Tab(text: "Hijb"),
                                   ],
                                   unselectedLabelStyle: AppThemes
                                       .fontFamilyPoppinsColor0xFF9D1DF2FontSize13FontWeightW500,
@@ -135,19 +227,16 @@ class _UserMainBodyState extends State<UserMainBody> {
                                   onRefresh: () =>
                                       SurahCubit.get(context).getListOfSurahs(),
                                   itemBuilder: (_, index) => GestureDetector(
-                                    onTap: () => Navigator.pushNamed(
-                                        context, '/surah',
-                                        arguments: {
-                                          "surahNumber":
-                                              state.surahs[index].surahNumber,
-                                          "surahEnglishName": state
-                                              .surahs[index].surahEnglishName,
-                                          "surahEnglishNameTranslation": state
-                                              .surahs[index]
-                                              .surahEnglishNameTranslation,
-                                          "numberOfAyahs":
-                                              state.surahs[index].numberOfAyahs,
-                                        }),
+                                    onTap: () => navigateToSurahScreen(
+                                        surahNumber:
+                                            state.surahs[index].surahNumber,
+                                        surahEnglishName: state
+                                            .surahs[index].surahEnglishName,
+                                        surahEnglishNameTranslation: state
+                                            .surahs[index]
+                                            .surahEnglishNameTranslation,
+                                        numberOfAyahs:
+                                            state.surahs[index].numberOfAyahs),
                                     child: Container(
                                         padding: EdgeInsets.only(
                                             left:
@@ -193,10 +282,6 @@ class _UserMainBodyState extends State<UserMainBody> {
                                 return const CustomCircularProgressIndicator();
                               }
                             })
-
-                        // const Text("Para"),
-                        // const Text("Page"),
-                        // const Text("Hijb"),
                       ],
                     ),
                   )),

@@ -196,10 +196,10 @@ class AppThemes {
     fontSize: 13 * _textRatio,
     fontWeight: FontWeight.w500,
   );
-  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize24FontWeightW400 =
-      GoogleFonts.lateef(
+  static TextStyle fontFamilyPoppinsColor0xFF300759FontSize10FontWeightW500 =
+      GoogleFonts.poppins(
     color: color0xFF300759,
-    fontSize: 24 * _textRatio,
-    fontWeight: FontWeight.w400,
+    fontSize: 10 * _textRatio,
+    fontWeight: FontWeight.w500,
   );
 }

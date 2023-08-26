@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:quran_app/constants/end_points.dart';
 import 'package:quran_app/data/data_providers/remote/http_helper.dart';
 import 'package:quran_app/data/models/ayah_model.dart';
@@ -10,7 +9,7 @@ class SurahRequests {
   static late Map<String, dynamic> _data;
 
   static Future<List<SurahModel>> getListOfSurahs() async {
-    _data = await HttpHelper.getTheData(_surahsUrl);
+    _data = await HttpHelper.get(_surahsUrl);
     if (_data['code'] == 200) {
       return _data['data']
           .map((surah) => SurahModel.getListOfSurahFromJson(surah))
@@ -22,10 +21,9 @@ class SurahRequests {
   }
 
   static Future<List<AyahModel>> getSurahAyahs(int surahNumber) async {
-    _data = await HttpHelper.getTheData(
+    _data = await HttpHelper.get(
         "$_surahsUrl/$surahNumber/editions/quran-uthmani");
     if (_data['code'] == 200) {
-      debugPrint(_data['data'][0]['ayahs'].toString());
       return _data['data'][0]['ayahs']
           .map((ayah) => AyahModel.fromJson(ayah))
           .toList()

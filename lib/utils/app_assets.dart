@@ -8,4 +8,6 @@ class AppAssets {
   static const String helalIcon = 'assets/icons/helal.svg';
   static const String backIcon = 'assets/icons/back.svg';
   static const String directionIcon = 'assets/icons/direction.svg';
+  static const String readIcon = 'assets/icons/read.svg';
+  static const String bookIcon = 'assets/icons/book.svg';
 }

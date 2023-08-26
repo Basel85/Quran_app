@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/bussiness_logic/auth/auth_cubit.dart';
+import 'package:quran_app/bussiness_logic/cubits/auth/auth_cubit.dart';
 import 'package:quran_app/presentation/screens/home_screen.dart';
 import 'package:quran_app/presentation/screens/on_boarding_screen.dart';
 import 'package:quran_app/utils/app_themes.dart';

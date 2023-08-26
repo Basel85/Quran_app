@@ -15,13 +15,13 @@ class SharedPreferencesHelper {
     });
   }
 
-  static Future<String> getString(String key) {
+  static Future<String> getString(String key,String defaultValue) {
     return _sharedPreferences
-        .then((sharedPreference) => sharedPreference.getString(key) ?? 'Al-Fatiha');
+        .then((sharedPreference) => sharedPreference.getString(key) ?? defaultValue);
   }
 
-  static Future<int> getInt(String key) {
+  static Future<int> getInt(String key, int defaultValue) {
     return _sharedPreferences
-        .then((sharedPreference) => sharedPreference.getInt(key) ?? 1);
+        .then((sharedPreference) => sharedPreference.getInt(key) ?? defaultValue);
   }
 }

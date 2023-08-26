@@ -2,10 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:quran_app/bussiness_logic/auth/auth_cubit.dart';
-import 'package:quran_app/bussiness_logic/my_bloc_observer.dart';
-import 'package:quran_app/bussiness_logic/surah/surah_cubit.dart';
-import 'package:quran_app/bussiness_logic/ayah_selection/ayah_selection_cubit.dart';
+import 'package:quran_app/bussiness_logic/cubits/auth/auth_cubit.dart';
+import 'package:quran_app/bussiness_logic/cubits/last_read/last_read_cubit.dart';
+import 'package:quran_app/bussiness_logic/cubits/my_bloc_observer.dart';
+import 'package:quran_app/bussiness_logic/cubits/surah/surah_cubit.dart';
+import 'package:quran_app/bussiness_logic/cubits/ayah_selection/ayah_selection_cubit.dart';
 import 'package:quran_app/presentation/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
 import 'package:quran_app/presentation/cubits/calendar/calendar_cubit.dart';
 import 'package:quran_app/presentation/cubits/password_visibility/password_visibility_cubit.dart';
@@ -30,7 +31,8 @@ void main() async {
     BlocProvider<SurahCubit>(
       create: (context) => SurahCubit(),
     ),
-    BlocProvider<AyahSelectionCubit>(create: (context)=>AyahSelectionCubit())
+    BlocProvider<AyahSelectionCubit>(create: (context)=>AyahSelectionCubit()),
+    BlocProvider<LastReadCubit>(create: ((context) => LastReadCubit()))
   ], child: const MyApp()));
 }
 

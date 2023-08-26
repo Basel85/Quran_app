@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/bussiness_logic/auth/auth_states.dart';
+import 'package:quran_app/bussiness_logic/cubits/auth/auth_states.dart';
 import 'package:quran_app/data/data_providers/remote/firebase_helper.dart';
 import 'package:quran_app/data/network/requests/firebase_auth_state_changer.dart';
 import 'package:quran_app/data/network/requests/firebase_sign_in.dart';
