@@ -4,17 +4,21 @@ import 'package:quran_app/utils/app_assets.dart';
 import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/size_config.dart';
 
+import '../../../utils/keys.dart';
+
 class CustomAppBar extends StatelessWidget {
   final String title;
   final bool isHome;
   final bool isNotMainUserScreenAndNonBottomNavigationBarScreens;
   final IconData? actionsIcon;
+  final Future<void>? asyncFunctionInvokeInBackButtonOnTap;
   const CustomAppBar(
       {super.key,
       required this.title,
       this.actionsIcon,
       this.isHome = true,
-      this.isNotMainUserScreenAndNonBottomNavigationBarScreens = false});
+      this.isNotMainUserScreenAndNonBottomNavigationBarScreens = false,
+      this.asyncFunctionInvokeInBackButtonOnTap});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +50,13 @@ class CustomAppBar extends StatelessWidget {
                   ]
                 ] else ...[
                   GestureDetector(
-                    onTap: () => Navigator.pop(context),
+                    onTap: () async {
+                      if (asyncFunctionInvokeInBackButtonOnTap != null) {
+                        await asyncFunctionInvokeInBackButtonOnTap!;
+                      }
+                      debugPrint("Messi is the best in the world");
+                      Navigator.pop(Keys.navigatorKey.currentContext!);
+                    },
                     child: SvgPicture.asset(
                       AppAssets.backIcon,
                       width: 25 * SizeConfig.horizontalBlock,

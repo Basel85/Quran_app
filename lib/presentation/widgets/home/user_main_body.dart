@@ -22,12 +22,13 @@ class UserMainBody extends StatefulWidget {
 }
 
 class _UserMainBodyState extends State<UserMainBody> {
-  late String surahEnglishName;
-  late int ayahNumber;
+  late String surahEnglishNameText = "Loading...";
+  late String ayahNumberText = "Loading...";
+  String surahEnglishName = "Al-Faatiha";
+  int ayahNumber = 1;
   @override
   initState() {
     LastReadCubit.get(context).getValues();
-    SurahCubit.get(context).getListOfSurahs();
     super.initState();
   }
 
@@ -35,12 +36,14 @@ class _UserMainBodyState extends State<UserMainBody> {
       {required int surahNumber,
       required String surahEnglishName,
       required String surahEnglishNameTranslation,
-      required int numberOfAyahs}) {
+      required int numberOfAyahs,
+      required int startingAyahNumber}) {
     Navigator.pushNamed(context, '/surah', arguments: {
       "surahNumber": surahNumber,
       "surahEnglishName": surahEnglishName,
       "surahEnglishNameTranslation": surahEnglishNameTranslation,
       "numberOfAyahs": numberOfAyahs,
+      "startingAyahNumber": startingAyahNumber
     });
   }
 
@@ -88,17 +91,33 @@ class _UserMainBodyState extends State<UserMainBody> {
                           ),
                         ),
                         SliverToBoxAdapter(
-                          child: BlocBuilder<LastReadCubit, LastReadState>(
+                          child: BlocConsumer<LastReadCubit, LastReadState>(
+                            listener: (context, state) {
+                              if (state is LastReadSuccessState) {
+                                surahEnglishName = state.surahEnglishName;
+                                ayahNumber = state.ayahNumber;
+                                surahEnglishNameText = state.surahEnglishName;
+                                ayahNumberText = "Ayah no. ${state.ayahNumber}";
+                                SurahCubit.get(context).getListOfSurahs();
+                              } else if (state is LastReadErrorState) {
+                                surahEnglishNameText = state.errorMessage;
+                                ayahNumberText = state.errorMessage;
+                                SurahCubit.get(context).getListOfSurahs();
+                              } else {
+                                surahEnglishNameText = "Loading...";
+                                ayahNumberText = "Loading...";
+                              }
+                            },
                             builder: (_, state) => GestureDetector(
                               onTap: () {
                                 if (state is LastReadSuccessState) {
                                   navigateToSurahScreen(
                                       surahNumber: state.surahNumber,
-                                      surahEnglishName:
-                                          state.surahEnglishName,
+                                      surahEnglishName: state.surahEnglishName,
                                       surahEnglishNameTranslation:
                                           state.surahEnglishNameTranslation,
-                                      numberOfAyahs: state.numberOfAyahs);
+                                      numberOfAyahs: state.numberOfAyahs,
+                                      startingAyahNumber: state.ayahNumber);
                                 }
                               },
                               child: Container(
@@ -152,12 +171,12 @@ class _UserMainBodyState extends State<UserMainBody> {
                                         ),
                                         Text.rich(TextSpan(children: [
                                           TextSpan(
-                                            text: "Waiting...\n",
+                                            text: "$surahEnglishNameText\n",
                                             style: AppThemes
                                                 .fontFamilyPoppinsColor0xFF300759FontSize13FontWeightW700,
                                           ),
                                           TextSpan(
-                                            text: "Waiting...",
+                                            text: ayahNumberText,
                                             style: AppThemes
                                                 .fontFamilyPoppinsColor0xFF300759FontSize10FontWeightW500,
                                           )
@@ -236,7 +255,12 @@ class _UserMainBodyState extends State<UserMainBody> {
                                             .surahs[index]
                                             .surahEnglishNameTranslation,
                                         numberOfAyahs:
-                                            state.surahs[index].numberOfAyahs),
+                                            state.surahs[index].numberOfAyahs,
+                                        startingAyahNumber: surahEnglishName ==
+                                                state.surahs[index]
+                                                    .surahEnglishName
+                                            ? ayahNumber
+                                            : -1),
                                     child: Container(
                                         padding: EdgeInsets.only(
                                             left:

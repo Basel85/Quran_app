@@ -27,6 +27,7 @@ class RouteGenerator {
                 surahEnglishNameTranslation:
                     args['surahEnglishNameTranslation'],
                 numberOfAyahs: args['numberOfAyahs'],
+                startingAyahNumber: args['startingAyahNumber'],
               );
             },
             settings: settings);

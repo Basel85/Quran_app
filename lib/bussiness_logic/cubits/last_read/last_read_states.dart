@@ -9,11 +9,12 @@ class LastReadSuccessState extends LastReadState {
   final String surahEnglishName;
   final int ayahNumber;
   final int surahNumber;
-  LastReadSuccessState(
+  final int numberOfAyahs;
+  LastReadSuccessState( 
       {required this.surahEnglishNameTranslation,
       required this.surahEnglishName,
       required this.ayahNumber,
-      required this.surahNumber});
+      required this.surahNumber,required this.numberOfAyahs});
 }
 class LastReadErrorState extends LastReadState {
   final String errorMessage;
