@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget {
   final bool isHome;
   final bool isNotMainUserScreenAndNonBottomNavigationBarScreens;
   final IconData? actionsIcon;
-  final Future<void>? asyncFunctionInvokeInBackButtonOnTap;
+  final Future<void> Function()? asyncFunctionInvokeInBackButtonOnTap;
   const CustomAppBar(
       {super.key,
       required this.title,
@@ -52,7 +52,7 @@ class CustomAppBar extends StatelessWidget {
                   GestureDetector(
                     onTap: () async {
                       if (asyncFunctionInvokeInBackButtonOnTap != null) {
-                        await asyncFunctionInvokeInBackButtonOnTap!;
+                        await asyncFunctionInvokeInBackButtonOnTap!();
                       }
                       debugPrint("Messi is the best in the world");
                       Navigator.pop(Keys.navigatorKey.currentContext!);

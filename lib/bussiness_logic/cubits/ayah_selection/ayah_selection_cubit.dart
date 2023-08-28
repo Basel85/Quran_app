@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/bussiness_logic/cubits/ayah_selection/ayah_selection_states.dart';
 import 'package:quran_app/data/network/requests/shared_preferences_requests.dart';
@@ -22,19 +23,23 @@ class AyahSelectionCubit extends Cubit<AyahSelectionState> {
           await SharedPreferencesRequests.getSurahEnglishName();
       if (!(ayahNumber == currentAyahNumber &&
           surahEnglishName == currentSurahEnglishName)) {
+        debugPrint("Hi");
         await SharedPreferencesRequests.setValues(
             ayahNumber: ayahNumber,
             surahEnglishName: surahEnglishName,
             surahNumber: surahNumber,
             surahEnglishNameTranslation: surahEnglishNameTranslation,
             numberOfAyahs: numberOfAyahs);
+        debugPrint(
+            "currentAyahNumber: $currentAyahNumber ayahNumber: $ayahNumber");
         emit(AyahSelectionSuccessState(
           currentAyahNumber: ayahNumber,
           currentSurahEnglishName: surahEnglishName,
         ));
       }
     } catch (_) {
-      emit(AyahSelectionErrorState(errorMessage: AppExceptionMessages.unexpectedExceptionMessage));
+      emit(AyahSelectionErrorState(
+          errorMessage: AppExceptionMessages.unexpectedExceptionMessage));
     }
   }
 }
