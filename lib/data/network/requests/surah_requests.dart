@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:quran_app/constants/end_points.dart';
 import 'package:quran_app/data/data_providers/remote/http_helper.dart';
 import 'package:quran_app/data/models/ayah_model.dart';
@@ -24,7 +23,6 @@ class SurahRequests {
   static Future<List<AyahModel>> getSurahAyahs(int surahNumber) async {
     _data = await HttpHelper.get(
         "$_surahsUrl/$surahNumber");
-    debugPrint( _data['data']['ayahs'].toString());
     if (_data['code'] == 200) {
       return _data['data']['ayahs']
           .map((ayah) => AyahModel.fromJson(ayah))
