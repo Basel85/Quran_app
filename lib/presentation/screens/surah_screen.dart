@@ -35,49 +35,17 @@ class SurahScreen extends StatefulWidget {
 
 class _SurahScreenState extends State<SurahScreen> with SnackBarViewer {
   int _previousAyahNumber = -1;
-  int _numberOfFirstBuiltComponents = -1;
   late int _ayahNumber;
   late String _surahEnglishName;
   final ItemScrollController _itemScrollController = ItemScrollController();
-  final GlobalKey _scrollablePositionedListKey = GlobalKey();
-  final ItemPositionsListener _itemPositionsListener =
-      ItemPositionsListener.create();
+  final GlobalKey _lastItemKey = GlobalKey();
 
   @override
   void initState() {
-    _itemPositionsListener.itemPositions.addListener(() {
-      debugPrint("Ahhhhhhhh");
-      if (_numberOfFirstBuiltComponents == -1) {
-        _numberOfFirstBuiltComponents =
-            _itemPositionsListener.itemPositions.value.where((element) {
-          return element.itemLeadingEdge >= 0 && element.itemTrailingEdge <= 1;
-        }).length;
-        debugPrint(
-            _itemPositionsListener.itemPositions.value.length.toString());
-        _itemPositionsListener.itemPositions.removeListener(() {});
-      }
-    });
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-                          debugPrint("Hssss");
-                          if (_ayahNumber != -1 &&
-                              _numberOfFirstBuiltComponents !=
-                                  widget.numberOfAyahs) {
-                            _itemScrollController.scrollTo(
-                              index: _ayahNumber - 1,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeInOutCubic,
-                            );
-                          }
-                        });
     _ayahNumber = widget.startingAyahNumber;
     _surahEnglishName = widget.surahEnglishName;
     SurahCubit.get(context).getSurahAyahs(surahNumber: widget.surahNumber);
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   Future<void> updateLastReadWidget() async {
@@ -136,7 +104,7 @@ class _SurahScreenState extends State<SurahScreen> with SnackBarViewer {
                       current is SurahGetSurahAyahsErrorState,
                   builder: (_, state) {
                     if (state is SurahGetSurahAyahsSuccessState) {
-                      
+                      try {
                         return RefreshIndicator(
                           backgroundColor: AppThemes.color0xFFDAD0E1,
                           color: AppThemes.color0xFF300759,
@@ -145,8 +113,6 @@ class _SurahScreenState extends State<SurahScreen> with SnackBarViewer {
                           onRefresh: () => SurahCubit.get(context)
                               .getSurahAyahs(surahNumber: widget.surahNumber),
                           child: ScrollablePositionedList.builder(
-                            key: _scrollablePositionedListKey,
-                            itemPositionsListener: _itemPositionsListener,
                             itemScrollController: _itemScrollController,
                             padding: EdgeInsets.only(
                               left: 6 * SizeConfig.horizontalBlock,
@@ -177,48 +143,75 @@ class _SurahScreenState extends State<SurahScreen> with SnackBarViewer {
                                     (current.currentAyahNumber == index + 1 ||
                                         _previousAyahNumber == index + 1);
                               },
-                              builder: (_, ayahSelectionState) =>
-                                  GestureDetector(
-                                onTap: () {
-                                  _previousAyahNumber = _ayahNumber;
-                                  debugPrint(
-                                      "previousAyahNumber: $_previousAyahNumber");
-                                  AyahSelectionCubit.get(context).selectAyah(
-                                      ayahNumber: index + 1,
-                                      surahEnglishName: widget.surahEnglishName,
-                                      surahNumber: widget.surahNumber,
-                                      surahEnglishNameTranslation:
-                                          widget.surahEnglishNameTranslation,
-                                      numberOfAyahs: widget.numberOfAyahs);
-                                },
-                                child: Container(
-                                  color: ayahSelectionState
-                                          is AyahSelectionSuccessState
-                                      ? ayahSelectionState.currentAyahNumber ==
-                                                  index + 1 &&
-                                              ayahSelectionState
-                                                      .currentSurahEnglishName ==
-                                                  widget.surahEnglishName
-                                          ? AppThemes.pureWhite
-                                          : Colors.transparent
-                                      : _ayahNumber == index + 1
-                                          ? AppThemes.pureWhite
-                                          : Colors.transparent,
-                                  margin: EdgeInsets.only(
-                                      bottom: 39 * SizeConfig.verticalBlock),
-                                  child: Text(
-                                    state.surahAyahs[index].ayahText,
-                                    style: AppThemes
-                                        .fontFamilyLateefColor0xFF300759FontSize24FontWeightW400,
-                                    textDirection: TextDirection.rtl,
+                              builder: (_, ayahSelectionState) {
+                                debugPrint("index: $index");
+                                return GestureDetector(
+                                  key: index == widget.numberOfAyahs - 1
+                                      ? _lastItemKey
+                                      : null,
+                                  onTap: () {
+                                    _previousAyahNumber = _ayahNumber;
+                                    debugPrint(
+                                        "previousAyahNumber: $_previousAyahNumber");
+                                    AyahSelectionCubit.get(context).selectAyah(
+                                        ayahNumber: index + 1,
+                                        surahEnglishName:
+                                            widget.surahEnglishName,
+                                        surahNumber: widget.surahNumber,
+                                        surahEnglishNameTranslation:
+                                            widget.surahEnglishNameTranslation,
+                                        numberOfAyahs: widget.numberOfAyahs);
+                                  },
+                                  child: Container(
+                                    color: ayahSelectionState
+                                            is AyahSelectionSuccessState
+                                        ? ayahSelectionState
+                                                        .currentAyahNumber ==
+                                                    index + 1 &&
+                                                ayahSelectionState
+                                                        .currentSurahEnglishName ==
+                                                    widget.surahEnglishName
+                                            ? AppThemes.pureWhite
+                                            : Colors.transparent
+                                        : _ayahNumber == index + 1
+                                            ? AppThemes.pureWhite
+                                            : Colors.transparent,
+                                    margin: EdgeInsets.only(
+                                        bottom: 39 * SizeConfig.verticalBlock),
+                                    child: Text(
+                                      state.surahAyahs[index].ayahText,
+                                      style: AppThemes
+                                          .fontFamilyLateefColor0xFF300759FontSize24FontWeightW400,
+                                      textDirection: TextDirection.rtl,
+                                    ),
                                   ),
-                                ),
-                              ),
+                                );
+                              },
                             ),
                             itemCount: state.surahAyahs.length,
                           ),
                         );
-                      
+                      } finally {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          // debugPrint("Hssss");
+                          // if (_ayahNumber != -1 &&
+                          //     _numberOfFirstBuiltComponents !=
+                          //         widget.numberOfAyahs) {
+                          //   _itemScrollController.scrollTo(
+                          //     index: _ayahNumber - 1,
+                          //     duration: const Duration(milliseconds: 500),
+                          //     curve: Curves.easeInOutCubic,
+                          //   );
+                          // }
+                          final RenderBox box = _lastItemKey.currentContext!
+                              .findRenderObject() as RenderBox;
+
+                          debugPrint(
+                              "height : ${box.size.height}  width: ${box.size.width}");
+                          debugPrint(
+                              "dx : ${box.localToGlobal(Offset.zero).dx}  dy: ${box.localToGlobal(Offset.zero).dy}");
+                        });
+                      }
                     } else if (state is SurahGetSurahAyahsErrorState) {
                       return ApiErrorMessageComponent(
                         errorMessage: state.errorMessage,
