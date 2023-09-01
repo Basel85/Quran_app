@@ -114,7 +114,9 @@ class HomeScreen extends StatelessWidget {
                 nonHeaderDrawerIcon: Icons.settings,
                 nonHeaderDrawerText: "Settings"),
             NonHeaderDrawerComponent(
-                onTap: () {},
+                onTap: () {
+                  
+                },
                 nonHeaderDrawerIcon: Icons.logout,
                 nonHeaderDrawerText: "Log Out"),
           ],

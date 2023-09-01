@@ -2,15 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/bussiness_logic/cubits/auth/auth_states.dart';
 import 'package:quran_app/data/data_providers/remote/firebase_helper.dart';
-import 'package:quran_app/data/network/requests/firebase_auth_state_changer.dart';
-import 'package:quran_app/data/network/requests/firebase_sign_in.dart';
+import 'package:quran_app/data/network/requests/firebase_requests.dart';
+import 'package:quran_app/utils/app_execption_messages.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitialState());
-  final FirebaseLogin _firebaseGoogleLogin = GoogleLogin();
   static AuthCubit get(context) => BlocProvider.of(context);
   void signInWithGoogle() {
-    _signIn(_firebaseGoogleLogin);
+    _signIn(key: 'google');
   }
 
   // void signInWithFacebook() {
@@ -18,13 +17,21 @@ class AuthCubit extends Cubit<AuthState> {
   //   _signIn();
   // }
 
-  void signInWithEmailAndPassword() {
-    emit(AuthLoadingState());
-  }
-
-  void _signIn(FirebaseLogin firebaseLogin) async {
+  void signInWithEmailAndPassword(String email, String password) async {
     try {
-      final userCredential = await firebaseLogin.signIn();
+      emit(AuthLoadingState());
+      await _signIn(email: email, password: password);
+    } on FirebaseAuthException catch (error) {
+      emit(AuthErrorState(error.message!));
+    } catch (_) {
+      emit(AuthErrorState(AppExceptionMessages.unexpectedExceptionMessage));
+    }
+  }
+  Future<void> _signIn(
+      {String key = "", String email = "", String password = ""}) async {
+    try {
+      final userCredential = await FirebaseRequests.signIn(
+          key: key, email: email, password: password);
       if (userCredential.user != null) {
         emit(AuthSuccessState("Success Login ${userCredential.user!.email}"));
       } else {
@@ -33,15 +40,15 @@ class AuthCubit extends Cubit<AuthState> {
     } on FirebaseAuthException catch (error) {
       emit(AuthErrorState(error.message!));
     } catch (_) {
-      emit(AuthErrorState("Something went wrong please try again later"));
+      emit(AuthErrorState(AppExceptionMessages.unexpectedExceptionMessage));
     }
   }
 
   Stream<User?> authStateChanges() {
-    return FirebaseAuthStateChanger.authStateChanges();
+    return FirebaseRequests.authStateChanges();
   }
 
-  void logout() {
-    FirebaseHelper.getInstance().signOut();
+  void logout() async {
+    await FirebaseHelper.signOut();
   }
 }
