@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quran_app/business_logic/cubits/auth/auth_cubit.dart';
+import 'package:quran_app/business_logic/cubits/auth/auth_states.dart';
 import 'package:quran_app/presentation/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
 import 'package:quran_app/presentation/cubits/bottom_navigation_bar/bottom_navigation_bar_states.dart';
 import 'package:quran_app/presentation/widgets/home/drawer_non_header_component.dart';
@@ -12,8 +14,9 @@ import 'package:quran_app/presentation/widgets/shared/custom_bottom_navigation_b
 import 'package:quran_app/utils/app_assets.dart';
 import 'package:quran_app/utils/app_themes.dart';
 import 'package:quran_app/utils/size_config.dart';
+import 'package:quran_app/utils/snackbar_viewer.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget with SnackBarViewer {
   final String? displayName;
   const HomeScreen({super.key, required this.displayName});
 
@@ -27,9 +30,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   void gett(BottomNavigationBarState state) {
-    if (state is BottomNavigationBarIndexChangedState) {
-
-    }
+    if (state is BottomNavigationBarIndexChangedState) {}
   }
 
   @override
@@ -100,7 +101,8 @@ class HomeScreen extends StatelessWidget {
                   Expanded(
                       child: Text(
                     displayName!,
-                    style: AppThemes.fontFamilyPoppinsColor0xFF300759FontSize13FontWeightW600,
+                    style: AppThemes
+                        .fontFamilyPoppinsColor0xFF300759FontSize13FontWeightW600,
                   ))
                 ],
               ),
@@ -113,12 +115,29 @@ class HomeScreen extends StatelessWidget {
                 onTap: () => Navigator.pushNamed(context, '/settings'),
                 nonHeaderDrawerIcon: Icons.settings,
                 nonHeaderDrawerText: "Settings"),
-            NonHeaderDrawerComponent(
-                onTap: () {
-                  
-                },
-                nonHeaderDrawerIcon: Icons.logout,
-                nonHeaderDrawerText: "Log Out"),
+            BlocListener<AuthCubit, AuthState>(
+              listenWhen: (previous, current) =>
+                  current is AuthLogoutSuccessState ||
+                  current is AuthLogoutErrorState,
+              listener: (_, state) {
+                showSnackBar(
+                    context: context,
+                    backgroundColor: state is AuthLogoutSuccessState
+                        ? Colors.green
+                        : Colors.red,
+                    message: state is AuthLogoutSuccessState
+                        ? state.successMessage
+                        : state is AuthLogoutErrorState
+                            ? state.errorMessage
+                            : "");
+              },
+              child: NonHeaderDrawerComponent(
+                  onTap: () {
+                    AuthCubit.get(context).logout();
+                  },
+                  nonHeaderDrawerIcon: Icons.logout,
+                  nonHeaderDrawerText: "Log Out"),
+            ),
           ],
         ),
       ),
@@ -152,7 +171,6 @@ class HomeScreen extends StatelessWidget {
               }
             }
           },
-          
           backgroundColor: AppThemes.color0xFFDAD0E1,
           elevation: 0,
           selectedIconTheme: IconThemeData(
@@ -181,9 +199,7 @@ class HomeScreen extends StatelessWidget {
               ),
               label: "",
             ),
-            
           ],
-          
         ),
       ),
     );

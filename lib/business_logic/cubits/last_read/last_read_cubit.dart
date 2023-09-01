@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/bussiness_logic/cubits/last_read/last_read_states.dart';
+import 'package:quran_app/business_logic/cubits/last_read/last_read_states.dart';
 import 'package:quran_app/data/network/requests/shared_preferences_requests.dart';
 import 'package:quran_app/utils/app_execption_messages.dart';
 

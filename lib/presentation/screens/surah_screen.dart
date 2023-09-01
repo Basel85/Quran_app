@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran_app/bussiness_logic/cubits/last_read/last_read_cubit.dart';
-import 'package:quran_app/bussiness_logic/cubits/surah/surah_cubit.dart';
-import 'package:quran_app/bussiness_logic/cubits/surah/surah_states.dart';
-import 'package:quran_app/bussiness_logic/cubits/ayah_selection/ayah_selection_cubit.dart';
-import 'package:quran_app/bussiness_logic/cubits/ayah_selection/ayah_selection_states.dart';
+import 'package:quran_app/business_logic/cubits/last_read/last_read_cubit.dart';
+import 'package:quran_app/business_logic/cubits/surah/surah_cubit.dart';
+import 'package:quran_app/business_logic/cubits/surah/surah_states.dart';
+import 'package:quran_app/business_logic/cubits/ayah_selection/ayah_selection_cubit.dart';
+import 'package:quran_app/business_logic/cubits/ayah_selection/ayah_selection_states.dart';
 import 'package:quran_app/presentation/widgets/shared/api_error_message_component.dart';
 import 'package:quran_app/presentation/widgets/shared/column_located_on_the_first_body.dart';
 import 'package:quran_app/presentation/widgets/shared/custom_app_bar.dart';

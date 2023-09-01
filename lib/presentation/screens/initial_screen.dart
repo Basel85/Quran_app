@@ -1,38 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/bussiness_logic/cubits/auth/auth_cubit.dart';
+import 'package:quran_app/business_logic/non_cubits/auth_non_cubit.dart';
 import 'package:quran_app/presentation/screens/home_screen.dart';
-import 'package:quran_app/presentation/screens/on_boarding_screen.dart';
-import 'package:quran_app/utils/app_themes.dart';
-import 'package:quran_app/utils/keys.dart';
-import 'package:quran_app/utils/size_config.dart';
+import 'package:quran_app/presentation/screens/login_screen.dart';
 
-class InitialScreen extends StatefulWidget {
+class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
-
-  @override
-  State<InitialScreen> createState() => _InitialScreenState();
-}
-
-class _InitialScreenState extends State<InitialScreen> {
-  @override
-  void initState() {
-    SizeConfig.init(Keys.navigatorKey.currentContext!);
-    AppThemes.init(SizeConfig.textRatio);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: AuthCubit.get(context).authStateChanges(),
+        stream: AuthNonCubit.authStateChanges(),
         builder: (_, snapShot) {
           if (snapShot.hasData) {
-            return HomeScreen(
-              displayName: snapShot.data!.displayName,
+           
+            return  HomeScreen(
+                displayName: snapShot.data!.displayName,
             );
-          } else {
-            return const OnBoardingScreen();
           }
+          return const LoginScreen();
         });
   }
 }
