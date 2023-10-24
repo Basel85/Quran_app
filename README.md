@@ -12,6 +12,6 @@ The app is for muslims around the world
 - Shared Preferences
 
 ## API
- - ### BaseUrl: 'http://api.alquran.cloud/v1/'
- - ### Get Surahs: 'http://api.alquran.cloud/v1/surahs'
- - ### Get Surah Ayahs: 'http://api.alquran.cloud/v1/surahs/{ayahNumber}'
+ - ### BaseUrl: http://api.alquran.cloud/v1/
+ - ### Get Surahs: http://api.alquran.cloud/v1/surahs
+ - ### Get Surah Ayahs: http://api.alquran.cloud/v1/surahs/{ayahNumber}
