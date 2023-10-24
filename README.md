@@ -6,7 +6,11 @@ The app is for muslims around the world
 - Showing the surahs and ayahs of the quran
 - Saving the last ayah read
 
-## Tools
+## Main Used Packages
 - Firebase Authentication
 - State Management (Cubit)
 - Shared Preferences
+
+## API
+ - ### BaseUrl: 'http://api.alquran.cloud/v1/'
+ - ### 
