@@ -2,7 +2,7 @@
 The app is for muslims around the world
 
 ## Features
-- Authentication (Google)
+- Authentication with Google
 - Showing the surahs and ayahs of the quran
 - Saving the last ayah read
 
@@ -13,4 +13,5 @@ The app is for muslims around the world
 
 ## API
  - ### BaseUrl: 'http://api.alquran.cloud/v1/'
- - ### 
+ - ### Get Surahs: 'http://api.alquran.cloud/v1/surahs'
+ - ### Get Surah Ayahs: 'http://api.alquran.cloud/v1/surahs/{ayahNumber ex(2)}'
