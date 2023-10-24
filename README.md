@@ -1,9 +1,9 @@
 # Quran App
-The app is for muslims around the world
+This app is designed for Muslims around the world.
 
 ## Features
 - Authentication with Google
-- Showing the surahs and ayahs of the quran
+- Displaying the surahs and ayahs of the Quran
 - Saving the last ayah read
 
 ## Packages
