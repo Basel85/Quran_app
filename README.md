@@ -1,4 +1,4 @@
-# quran_app
+# Quran App
 The app is for muslims around the world
 
 ## Features
